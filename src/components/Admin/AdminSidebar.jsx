@@ -1,10 +1,19 @@
 import React from "react";
 import GridViewIcon from "@mui/icons-material/GridView";
 import InventoryIcon from "@mui/icons-material/Inventory";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 const AdminSidebar = () => {
+  const [toggleProduct, setToggleProduct] = useState(false);
+
+  const toggleChange = () => {
+    setToggleProduct(!toggleProduct);
+  };
   return (
-    <section className="bg-slate-900 p-5 w-64 h-full ">
+    <section className="bg-slate-900 p-5 w-64 ">
       <div className="flex flex-col  gap-8 mb-5">
         <div className="flex items-center gap-3">
           <img
@@ -24,23 +33,42 @@ const AdminSidebar = () => {
       </div>
       {/* Dashboard */}
       <div className="text-gray-300 text-base font-semibold  ">
-        <ul>
-          <li className="flex items-center gap-2 mb-3">
-            <GridViewIcon sx={{ fontSize: 20, color: "gray " }} />
-            Dashboard
-          </li>
+        <ul className="cursor-pointer">
+          <Link to="">
+            <li className="flex items-center gap-2 mb-3">
+              <GridViewIcon sx={{ fontSize: 20, color: "gray " }} />
+              Dashboard
+            </li>
+          </Link>
           <li className="flex items-center justify-between  mb-3">
             <div className="flex items-center gap-2">
               <InventoryIcon sx={{ fontSize: 20, color: "gray " }} />
               Product
             </div>
-            <KeyboardArrowDownIcon sx={{ fontSize: 20, color: "gray " }} />
+            <button onClick={toggleChange}>
+              {toggleProduct ? (
+                <KeyboardArrowDownIcon sx={{ fontSize: 20, color: "gray" }} />
+              ) : (
+                <KeyboardArrowUpIcon sx={{ fontSize: 20, color: "gray" }} />
+              )}{" "}
+            </button>
           </li>
-        </ul>
-        <ul className="list-disc ml-8 ">
-          <li className="mb-1 text-sm text-gray-400">Add Product</li>
-          <li className="mb-1 text-sm text-gray-400">All Product</li>
-          <li className="mb-1 text-sm text-gray-400">Brand</li>
+          {toggleProduct && (
+            <ul className="list-disc ml-8 ">
+              <li className="mb-1 text-sm text-gray-400">
+                {" "}
+                <Link to="/admin/product/create">Add New Product</Link>
+              </li>
+              <li className="mb-1 text-sm text-gray-400">
+                <Link to="/admin/product/view">View All Product</Link>
+              </li>
+              <li className="mb-1 text-sm text-gray-400">Brand</li>
+            </ul>
+          )}
+          <li className="flex items-center gap-2 mb-3">
+            <LogoutIcon sx={{ fontSize: 20, color: "gray " }} />
+            Logout
+          </li>
         </ul>
       </div>
     </section>
