@@ -13,7 +13,7 @@ const AdminSidebar = () => {
     setToggleProduct(!toggleProduct);
   };
   return (
-    <section className="bg-slate-900 p-5 w-64 ">
+    <section className="bg-gray-900 p-5 w-64  h-screen">
       <div className="flex flex-col  gap-8 mb-5">
         <div className="flex items-center gap-3">
           <img
@@ -32,7 +32,7 @@ const AdminSidebar = () => {
         />
       </div>
       {/* Dashboard */}
-      <div className="text-gray-300 text-base font-semibold  ">
+      <div className="text-gray-300 text-base font-semibold   ">
         <ul className="cursor-pointer">
           <Link to="">
             <li className="flex items-center gap-2 mb-3">

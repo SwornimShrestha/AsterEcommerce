@@ -136,7 +136,7 @@ export default function AllProduct() {
     <div className="mb-20">
       <div className="flex justify-between m-7 ">
         <h1 className="font-medium text-base ">All Product</h1>
-        <Link to="product/create">
+        <Link to="/admin/product/create">
           <button className="bg-blue-400 text-white h-10 p-2 px-3 rounded-full text-base font-semibold">
             Add New Product
           </button>

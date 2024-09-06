@@ -9,10 +9,14 @@ const Admin = () => {
     setSidebar(!sidebar);
   };
   return (
-    <section className="flex  min-h-screen  overflow-hidden ">
-      <AdminSidebar />
-      <div className="bg-white w-full relative">
-        <div className="bg-slate-100  h-14 flex items-center p-4  justify-between  ">
+    <section className="flex  h-screen overflow-hidden ">
+      <div className="">
+        <AdminSidebar />
+      </div>
+
+      <div className="bg-white w-full relative overflow-auto ">
+        {/* top-bar */}
+        <div className="bg-slate-100  h-14 flex items-center p-4  justify-between  sticky top-0 z-50  ">
           <div className=" flex flex-row gap-6 items-center">
             <button onClick={toogleSidebar}>
               <img
@@ -66,7 +70,8 @@ const Admin = () => {
             />
           </div>
         </div>
-        <div className="ml-2 h-full overflow-auto">
+
+        <div className="ml-2  ">
           <Outlet />
         </div>
       </div>
