@@ -63,6 +63,9 @@ const AdminSidebar = () => {
                 <Link to="/admin/product/view">View All Product</Link>
               </li>
               <li className="mb-1 text-sm text-gray-400">Brand</li>
+              <li className="mb-1 text-sm text-gray-400">
+                <Link to="/admin/product/category">Category</Link>
+              </li>
             </ul>
           )}
           <li className="flex items-center gap-2 mb-3">

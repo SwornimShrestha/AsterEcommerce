@@ -23,7 +23,7 @@ const Admin = () => {
       </div>
       <div className="bg-white w-full relative overflow-auto ">
         {/* top-bar */}
-        <div className="bg-slate-100  h-14 flex items-center p-4  justify-between  sticky top-0 z-50  ">
+        <div className="bg-slate-100  h-14 flex items-center p-4  justify-between  sticky top-0 z-50 shadow-lg">
           <div className=" flex flex-row gap-6 items-center">
             <button onClick={toogleSidebar}>
               <img

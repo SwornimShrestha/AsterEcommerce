@@ -12,6 +12,7 @@ import AddProduct from "./components/Admin/AddProduct";
 import Dashboard from "./components/Admin/Dashboard";
 import AllProduct from "./components/Admin/AllProduct";
 import ProductDetails from "./components/Product/ProductDetails";
+import Category from "./components/Admin/Category";
 
 function App() {
   const router = createBrowserRouter(
@@ -24,6 +25,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="product/create" element={<AddProduct />} />
           <Route path="product/view" element={<AllProduct />} />
+          <Route path="product/category" element={<Category />} />
         </Route>
       </Route>
     )

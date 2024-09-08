@@ -301,14 +301,7 @@ const AddProduct = () => {
                   name="description"
                   value={formData.description}
                 />
-                {/* <textarea
-                  onChange={handleChange}
-                  name="description"
-                  value={formData.description}
-                  rows="8"
-                  placeholder="Product description"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                ></textarea> */}
+                
               </div>
             </div>
             <div>
