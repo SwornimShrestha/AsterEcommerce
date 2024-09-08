@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import AdminSidebar from "../components/Admin/AdminSidebar";
 import PublicIcon from "@mui/icons-material/Public";
+import WysiwygIcon from "@mui/icons-material/Wysiwyg";
+import ClearAllIcon from "@mui/icons-material/ClearAll";
+import EmojiFlagsIcon from "@mui/icons-material/EmojiFlags";
 import { Outlet } from "react-router-dom";
 
 const Admin = () => {
@@ -10,10 +14,13 @@ const Admin = () => {
   };
   return (
     <section className="flex  h-screen overflow-hidden ">
-      <div className="">
+      <div
+        className={`transition-transform duration-300 ${
+          sidebar ? "block" : "hidden"
+        } w-64 bg-gray-800`}
+      >
         <AdminSidebar />
       </div>
-
       <div className="bg-white w-full relative overflow-auto ">
         {/* top-bar */}
         <div className="bg-slate-100  h-14 flex items-center p-4  justify-between  sticky top-0 z-50  ">
@@ -30,11 +37,11 @@ const Admin = () => {
                 <PublicIcon />
               </div>
               <div className="w-8 h-8 bg-slate-300 rounded-full px-1 relative">
-                <PublicIcon />
+                <WysiwygIcon />
               </div>
 
               <div className="w-8 h-8 bg-slate-300 rounded-full px-1 relative">
-                <PublicIcon />
+                <ClearAllIcon />
               </div>
             </div>
             <ul className="flex gap-4 items-center text-xs font-medium">
@@ -53,10 +60,10 @@ const Admin = () => {
           <div className="flex  items-center gap-3">
             <div className="flex gap-3 ">
               <div className="w-8 h-8 bg-slate-300 rounded-full px-1 relative">
-                <PublicIcon />
+                <NotificationsActiveIcon />
               </div>
               <div className="w-8 h-8 bg-slate-300 rounded-full px-1 relative">
-                <PublicIcon />
+                <EmojiFlagsIcon />
               </div>
             </div>
             <div className="flex flex-col items-end  ">

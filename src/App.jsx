@@ -11,12 +11,15 @@ import Home from "./pages/Home";
 import AddProduct from "./components/Admin/AddProduct";
 import Dashboard from "./components/Admin/Dashboard";
 import AllProduct from "./components/Admin/AllProduct";
+import ProductDetails from "./components/Product/ProductDetails";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route path="" element={<Home />} />
+        <Route path="products/:id" element={<ProductDetails />} />
+
         <Route path="admin" element={<Admin />}>
           <Route index element={<Dashboard />} />
           <Route path="product/create" element={<AddProduct />} />

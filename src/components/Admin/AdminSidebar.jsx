@@ -32,7 +32,7 @@ const AdminSidebar = () => {
         />
       </div>
       {/* Dashboard */}
-      <div className="text-gray-300 text-base font-semibold   ">
+      <div className="text-gray-300 text-base font-semibold    ">
         <ul className="cursor-pointer">
           <Link to="">
             <li className="flex items-center gap-2 mb-3">

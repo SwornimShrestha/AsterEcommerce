@@ -19,118 +19,64 @@ import { Link } from "react-router-dom";
 
 export default function AllProduct() {
   const [Product, setProduct] = useState([
-    {
-      id: 1,
-      image:
-        "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Gray Shirt",
-      addedBY: "swornim",
-      stock: 100,
-      description: "lorem12 Lorem i",
-      price: 200,
-      category: "Men's ",
-    },
-    {
-      id: 2,
-      image:
-        "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Gray Shirt",
-      addedBY: "swornim",
-      stock: 100,
-      description: "lorem12 Lorem i",
-      price: 200,
-      category: "Men's ",
-    },
-    {
-      id: 3,
-      image:
-        "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Gray Shirt",
-      addedBY: "swornim",
-      stock: 100,
-      description: "lorem12 Lorem i",
-      price: 200,
-      category: "Men's ",
-    },
-    {
-      id: 1,
-      image:
-        "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Gray Shirt",
-      addedBY: "swornim",
-      stock: 100,
-      description: "lorem12 Lorem i",
-      price: 200,
-      category: "Men's ",
-    },
-    {
-      id: 2,
-      image:
-        "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Gray Shirt",
-      addedBY: "swornim",
-      stock: 100,
-      description: "lorem12 Lorem i",
-      price: 200,
-      category: "Men's ",
-    },
-    {
-      id: 3,
-      image:
-        "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Gray Shirt",
-      addedBY: "swornim",
-      stock: 100,
-      description: "lorem12 Lorem i",
-      price: 200,
-      category: "Men's ",
-    },
-    {
-      id: 1,
-      image:
-        "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Gray Shirt",
-      addedBY: "swornim",
-      stock: 100,
-      description: "lorem12 Lorem i",
-      price: 200,
-      category: "Men's ",
-    },
-    {
-      id: 2,
-      image:
-        "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Gray Shirt",
-      addedBY: "swornim",
-      stock: 100,
-      description: "lorem12 Lorem i",
-      price: 200,
-      category: "Men's ",
-    },
-    {
-      id: 3,
-      image:
-        "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Gray Shirt",
-      addedBY: "swornim",
-      stock: 100,
-      description: "lorem12 Lorem i",
-      price: 200,
-      category: "Men's ",
-    },
+    // {
+    //   id: 1,
+    //   image:
+    //     "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    //   title: "Gray Shirt",
+    //   addedBY: "swornim",
+    //   stock: 100,
+    //   description: "lorem12 Lorem i",
+    //   price: 200,
+    //   category: "Men's ",
+    // },
+    // {
+    //   id: 2,
+    //   image:
+    //     "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    //   title: "Gray Shirt",
+    //   addedBY: "swornim",
+    //   stock: 100,
+    //   description: "lorem12 Lorem i",
+    //   price: 200,
+    //   category: "Men's ",
+    // },
+    // {
+    //   id: 3,
+    //   image:
+    //     "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    //   title: "Gray Shirt",
+    //   addedBY: "swornim",
+    //   stock: 100,
+    //   description: "lorem12 Lorem i",
+    //   price: 200,
+    //   category: "Men's ",
+    // },
   ]);
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     try {
-  //       const response = await axios.get(`${import.meta.env.VITE_PRODUCTS}`);
-  //       console.log(response.data);
-  //       setProduct(response.data);
-  //     } catch (error) {
-  //       console.error("Error occured:", error);
-  //     }
-  //   };
-  //   fetchProducts();
-  // }, []);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_PRODUCTS}`);
+        console.log(response.data);
+        setProduct(response.data);
+      } catch (error) {
+        console.error("Error occured:", error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  const handleDelete = async (productId) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_PRODUCTS}/${productId}`);
+      console.log(`Product with ID  deleted.`);
+      setProduct((prevData) =>
+        prevData.filter((data) => data.id !== productId)
+      );
+    } catch (error) {
+      console.error("Error occurred while deleting:", error);
+    }
+  };
 
   return (
     <div className="mb-20">
@@ -245,8 +191,16 @@ export default function AllProduct() {
                   </TableCell>
                   <TableCell align="center">
                     <div className="flex items-center gap-2 ">
-                      <RemoveRedEyeIcon sx={{ color: "green", fontSize: 16 }} />
-                      <DeleteOutlineIcon sx={{ color: "red", fontSize: 14 }} />
+                      <Link to={`/products/${data.id}`}>
+                        <RemoveRedEyeIcon
+                          sx={{ color: "green", fontSize: 16 }}
+                        />
+                      </Link>
+                      <button onClick={() => handleDelete(data.id)}>
+                        <DeleteOutlineIcon
+                          sx={{ color: "red", fontSize: 14 }}
+                        />
+                      </button>
 
                       <ContentCopyIcon sx={{ color: "orange", fontSize: 14 }} />
                       <BorderColorIcon sx={{ color: "green", fontSize: 14 }} />

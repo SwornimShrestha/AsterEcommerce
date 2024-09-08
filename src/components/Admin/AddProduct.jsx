@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import AddProductNavbar from "./AddProductNavbar";
-
+import JoditEditor from "jodit-react";
 const AddProduct = () => {
+  const editor = useRef(null);
   const [formData, setFormData] = useState({
     id: uuidv4(),
     productName: "",
@@ -17,19 +18,34 @@ const AddProduct = () => {
     tax: "",
     vat: "",
     image: "",
+    category: [],
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    const { name, value, checked } = e.target;
+
+    if (name === "category") {
+      setFormData((prevFormData) => {
+        const updatedCategories = checked
+          ? [...prevFormData.category, value]
+          : prevFormData.category.filter((category) => category !== value);
+
+        return {
+          ...prevFormData,
+          category: updatedCategories,
+        };
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(formData);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_PRODUCTS}`,
@@ -52,8 +68,9 @@ const AddProduct = () => {
         tax: "",
         vat: "",
         image: "",
+        category: "",
       });
-      console.log("Form Submitted", response.data);
+      alert("Form Submitted", response.data);
     } catch (error) {
       console.error("There was an error submitting the form:", error);
     }
@@ -71,7 +88,7 @@ const AddProduct = () => {
           {" "}
           <h1 className="font-bold text-base   mb-2"> Product Information</h1>
           {/* Add Form */}
-          <div className="container  mb-20  bg-white rounded-lg  ">
+          <div className="container  mb-20  bg-white rounded-lg  pr-12 ">
             <div className="grid  grid-cols-3 gap-2">
               <div className="grid grid-cols-3 col-span-2 gap-3 ">
                 <label className="block text-gray-700 font-normal mb-2">
@@ -165,79 +182,137 @@ const AddProduct = () => {
                   <h3 className="text-base  font-semibold text-gray-700 sticky top-0 bg-white z-10 h-9">
                     Product Category
                   </h3>
-                  <div className="flex flex-col gap-1  ">
+                  <div className="flex flex-col gap-1">
                     <label className="flex items-center">
-                      <input type="checkbox" className="mr-2" />
+                      <input
+                        type="checkbox"
+                        name="category"
+                        value="Women Clothing & Fashion"
+                        onChange={handleChange}
+                        className="mr-2"
+                      />
                       Women Clothing & Fashion
                     </label>
                     <label className="flex items-center">
-                      <input type="checkbox" className="mr-2" />
+                      <input
+                        type="checkbox"
+                        name="category"
+                        value="Men Clothing & Fashion"
+                        onChange={handleChange}
+                        className="mr-2"
+                      />
                       Men Clothing & Fashion
                     </label>
                     <label className="flex items-center">
-                      <input type="checkbox" className="mr-2" />
+                      <input
+                        type="checkbox"
+                        name="category"
+                        value="Sports & Outdoor"
+                        onChange={handleChange}
+                        className="mr-2"
+                      />
                       Sports & Outdoor
                     </label>
                     <label className="flex items-center">
-                      <input type="checkbox" className="mr-2" />
+                      <input
+                        type="checkbox"
+                        name="category"
+                        value="Computer & Accessories"
+                        onChange={handleChange}
+                        className="mr-2"
+                      />
                       Computer & Accessories
                     </label>
-
                     <label className="flex items-center">
-                      <input type="checkbox" className="mr-2" />
+                      <input
+                        type="checkbox"
+                        name="category"
+                        value="Kids & Joy"
+                        onChange={handleChange}
+                        className="mr-2"
+                      />
                       Kids & Joy
                     </label>
                     <label className="flex items-center">
-                      <input type="checkbox" className="mr-2" />
-                      jewelry & Tabs
+                      <input
+                        type="checkbox"
+                        name="category"
+                        value="Jewelry & Tabs"
+                        onChange={handleChange}
+                        className="mr-2"
+                      />
+                      Jewelry & Tabs
                     </label>
                     <label className="flex items-center">
-                      <input type="checkbox" className="mr-2" />
-                      Home improvement & Table
+                      <input
+                        type="checkbox"
+                        name="category"
+                        value="Home Improvement & Table"
+                        onChange={handleChange}
+                        className="mr-2"
+                      />
+                      Home Improvement & Table
                     </label>
                     <label className="flex items-center">
-                      <input type="checkbox" className="mr-2" />
-                      Home decoration & Application
+                      <input
+                        type="checkbox"
+                        name="category"
+                        value="Home Decoration & Application"
+                        onChange={handleChange}
+                        className="mr-2"
+                      />
+                      Home Decoration & Application
+                    </label>
+
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        name="category"
+                        value="Toy"
+                        onChange={handleChange}
+                        className="mr-2"
+                      />
+                      Toy
                     </label>
                     <label className="flex items-center">
-                      <input type="checkbox" className="mr-2" />
-                      Women Clothing & Fashion
-                    </label>
-                    <label className="flex items-center">
-                      <input type="checkbox" className="mr-2" />
-                      Men Clothing & Fashion
-                    </label>
-                    <label className="flex items-center">
-                      <input type="checkbox" className="mr-2" />
-                      Sports & Outdoor
-                    </label>
-                    <label className="flex items-center">
-                      <input type="checkbox" className="mr-2" />
-                      Computer & Accessories
+                      <input
+                        type="checkbox"
+                        name="category"
+                        value="Automobile & Motorcycle"
+                        onChange={handleChange}
+                        className="mr-2"
+                      />
+                      Automobile & Motorcycle
                     </label>
                   </div>
                 </div>
               </div>
 
-              <div className="col-span-3">
+              <div className="col-span-3 mt-8">
                 <label
                   className="block text-gray-700 font-normal mb-2"
                   htmlFor="description"
                 >
                   Description
                 </label>
-                <textarea
+                <JoditEditor
+                  ref={editor}
+                  onChange={handleChange}
+                  name="description"
+                  value={formData.description}
+                />
+                {/* <textarea
                   onChange={handleChange}
                   name="description"
                   value={formData.description}
                   rows="8"
                   placeholder="Product description"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                ></textarea>
+                ></textarea> */}
               </div>
             </div>
             <div>
-              <h1 className="font-bold text-base">Tax & Vat</h1>
+              <h1 className="font-bold text-base mt-8">Tax & Vat</h1>
 
               <div className="grid grid-cols-2 gap-6 mt-6">
                 <div>
