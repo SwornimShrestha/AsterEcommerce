@@ -5,7 +5,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 const AdminSidebar = () => {
   const [toggleProduct, setToggleProduct] = useState(false);
 
@@ -66,8 +66,10 @@ const AdminSidebar = () => {
             </ul>
           )}
           <li className="flex items-center gap-2 mb-3">
-            <LogoutIcon sx={{ fontSize: 20, color: "gray " }} />
-            Logout
+            <Link to="/">
+              <LogoutIcon sx={{ fontSize: 20, color: "gray " }} />
+              Home
+            </Link>
           </li>
         </ul>
       </div>
