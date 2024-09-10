@@ -83,7 +83,7 @@ export default function CategoryAllProduct() {
     <div className="mb-20">
       <div className="flex justify-between m-7 ">
         <h1 className="font-medium text-base ">All Category</h1>
-        <Link to="/admin/product/create">
+        <Link to="/admin/category/create">
           <button className="bg-blue-400 text-white h-10 p-2 px-3 rounded-full text-base font-semibold">
             Add Category
           </button>
@@ -123,13 +123,13 @@ export default function CategoryAllProduct() {
                 <TableCell align="center" sx={{ width: "60px" }}>
                   Parent Category
                 </TableCell>
-                <TableCell align="center" sx={{ width: "60px" }}>
+                <TableCell align="left" sx={{ width: "60px" }}>
                   Banner
                 </TableCell>
-                <TableCell align="center" sx={{ width: "60px" }}>
+                <TableCell align="left" sx={{ width: "60px" }}>
                   Icon
                 </TableCell>
-                <TableCell align="center" sx={{ width: "60px" }}>
+                <TableCell align="left" sx={{ width: "60px" }}>
                   Cover Image
                 </TableCell>
                 <TableCell align="center" sx={{ width: "60px" }}>
@@ -156,7 +156,7 @@ export default function CategoryAllProduct() {
                   <TableCell
                     align="center"
                     sx={{
-                      paddingLeft: "58px",
+                      paddingLeft: "",
                     }}
                   >
                     <img
@@ -165,24 +165,14 @@ export default function CategoryAllProduct() {
                       alt="Cover Image"
                     />
                   </TableCell>
-                  <TableCell
-                    align="center"
-                    sx={{
-                      paddingLeft: "50px",
-                    }}
-                  >
+                  <TableCell align="center">
                     <img
                       className="w-12 h-12 object-center"
                       src={data.image}
                       alt="Cover Image"
                     />
                   </TableCell>
-                  <TableCell
-                    align="center"
-                    sx={{
-                      paddingLeft: "50px",
-                    }}
-                  >
+                  <TableCell align="left">
                     <img
                       className="w-12 h-12 object-center"
                       src={data.image}

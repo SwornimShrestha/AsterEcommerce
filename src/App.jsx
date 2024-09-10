@@ -8,11 +8,12 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import Home from "./pages/Home";
-import AddProduct from "./components/Admin/AddProduct";
-import Dashboard from "./components/Admin/Dashboard";
-import AllProduct from "./components/Admin/AllProduct";
+import AddProduct from "./components/Admin/Products/AddProduct";
+import AllProduct from "./components/Admin/Products/AllProduct";
+import Category from "./components/Admin/ProductCategory/Category";
+import AddCategory from "./components/Admin/ProductCategory/AddCategory";
 import ProductDetails from "./components/Product/ProductDetails";
-import Category from "./components/Admin/Category";
+import Dashboard from "./components/Admin/Dashboard";
 
 function App() {
   const router = createBrowserRouter(
@@ -26,6 +27,7 @@ function App() {
           <Route path="product/create" element={<AddProduct />} />
           <Route path="product/view" element={<AllProduct />} />
           <Route path="product/category" element={<Category />} />
+          <Route path="category/create" element={<AddCategory />} />
         </Route>
       </Route>
     )

@@ -1,10 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import AddProductNavbar from "./AddProductNavbar";
 import JoditEditor from "jodit-react";
+
 const AddProduct = () => {
+  const [parentCategoryVisible, setParentCategoryVisible] = useState(true);
+  const [subParentCategoryVisible, setSubParentCategoryVisible] =
+    useState(true);
+  const toogleParentCategory = () => {
+    setParentCategoryVisible(!parentCategoryVisible);
+  };
+
+  const toogleSubParentCategory = () => {
+    setSubParentCategoryVisible(!subParentCategoryVisible);
+  };
+
   const editor = useRef(null);
   const [formData, setFormData] = useState({
     id: uuidv4(),
@@ -20,6 +32,22 @@ const AddProduct = () => {
     image: "",
     category: [],
   });
+
+  useEffect(() => {
+    const fetchCategory = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_CATEGORYS}`);
+        console.log(response.data);
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          category: response.data,
+        }));
+      } catch (error) {
+        console.error("Error Occured:", error);
+      }
+    };
+    fetchCategory();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
@@ -177,113 +205,82 @@ const AddProduct = () => {
                 </div>
               </div>
               {/* Product Category */}
-              <div className=" shadow-lg p-3 grid grid-cols-1 col-span-1 h-80 ml-4 ">
+              <div className=" shadow-lg p-3 grid grid-cols-1 col-span-1 max-h-80 ml-4 ">
                 <div className="overflow-y-auto">
                   <h3 className="text-base  font-semibold text-gray-700 sticky top-0 bg-white z-10 h-9">
                     Product Category
                   </h3>
                   <div className="flex flex-col gap-1">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="category"
-                        value="Women Clothing & Fashion"
-                        onChange={handleChange}
-                        className="mr-2"
-                      />
-                      Women Clothing & Fashion
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="category"
-                        value="Men Clothing & Fashion"
-                        onChange={handleChange}
-                        className="mr-2"
-                      />
-                      Men Clothing & Fashion
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="category"
-                        value="Sports & Outdoor"
-                        onChange={handleChange}
-                        className="mr-2"
-                      />
-                      Sports & Outdoor
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="category"
-                        value="Computer & Accessories"
-                        onChange={handleChange}
-                        className="mr-2"
-                      />
-                      Computer & Accessories
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="category"
-                        value="Kids & Joy"
-                        onChange={handleChange}
-                        className="mr-2"
-                      />
-                      Kids & Joy
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="category"
-                        value="Jewelry & Tabs"
-                        onChange={handleChange}
-                        className="mr-2"
-                      />
-                      Jewelry & Tabs
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="category"
-                        value="Home Improvement & Table"
-                        onChange={handleChange}
-                        className="mr-2"
-                      />
-                      Home Improvement & Table
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="category"
-                        value="Home Decoration & Application"
-                        onChange={handleChange}
-                        className="mr-2"
-                      />
-                      Home Decoration & Application
-                    </label>
+                    {formData.category.map((category) => (
+                      <div key={category.id}>
+                        <label className="flex  items-center ">
+                          <h1
+                            className="mr-2 mt-[-8px] cursor-pointer"
+                            onClick={toogleParentCategory}
+                          >
+                            {parentCategoryVisible ? "-" : "+"}
+                          </h1>
+                          <input
+                            type="checkbox"
+                            name="category"
+                            value={category.name}
+                            onChange={handleChange}
+                            className="mr-2"
+                          />
+                          {category.name}
+                        </label>
 
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="category"
-                        value="Toy"
-                        onChange={handleChange}
-                        className="mr-2"
-                      />
-                      Toy
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="category"
-                        value="Automobile & Motorcycle"
-                        onChange={handleChange}
-                        className="mr-2"
-                      />
-                      Automobile & Motorcycle
-                    </label>
+                        {parentCategoryVisible &&
+                          category.subcategories &&
+                          category.subcategories.length > 0 && (
+                            <div className="ml-4">
+                              {category.subcategories.map((subcategory) => (
+                                <div key={subcategory.id}>
+                                  <label className="flex items-center">
+                                    <h1
+                                      className="mr-2 mt-[-8px] cursor-pointer"
+                                      onClick={toogleSubParentCategory}
+                                    >
+                                      {subParentCategoryVisible ? "=" : "+"}
+                                    </h1>
+                                    <input
+                                      type="checkbox"
+                                      name="category"
+                                      value={subcategory.name}
+                                      onChange={handleChange}
+                                      className="mr-2"
+                                    />
+                                    {subcategory.name}
+                                  </label>
+                                  {subParentCategoryVisible &&
+                                    subcategory.subcategories &&
+                                    subcategory.subcategories.length > 0 && (
+                                      <div className="ml-4">
+                                        {subcategory.subcategories.map(
+                                          (nestedSubcategory) => (
+                                            <label
+                                              key={nestedSubcategory.id}
+                                              className="flex items-center"
+                                            >
+                                              <input
+                                                type="checkbox"
+                                                name="category"
+                                                value={nestedSubcategory.name}
+                                                onChange={handleChange}
+                                                className="mr-2"
+                                              />
+                                              {nestedSubcategory.name}
+                                            </label>
+                                          )
+                                        )}
+                                      </div>
+                                    )}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -301,7 +298,6 @@ const AddProduct = () => {
                   name="description"
                   value={formData.description}
                 />
-                
               </div>
             </div>
             <div>
