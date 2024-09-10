@@ -40,7 +40,7 @@ const AddProduct = () => {
         console.log(response.data);
         setFormData((prevFormData) => ({
           ...prevFormData,
-          category: response.data,
+          category: response.data[0].category,
         }));
       } catch (error) {
         console.error("Error Occured:", error);
@@ -260,7 +260,7 @@ const AddProduct = () => {
                                           (nestedSubcategory) => (
                                             <label
                                               key={nestedSubcategory.id}
-                                              className="flex items-center"
+                                              className="flex items-center ml-5"
                                             >
                                               <input
                                                 type="checkbox"
