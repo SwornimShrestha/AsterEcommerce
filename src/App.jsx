@@ -14,6 +14,7 @@ import Category from "./components/Admin/ProductCategory/Category";
 import AddCategory from "./components/Admin/ProductCategory/AddCategory";
 import ProductDetails from "./components/Product/ProductDetails";
 import Dashboard from "./components/Admin/Dashboard";
+import EditProduct from "./components/Admin/Products/EditProduct";
 
 function App() {
   const router = createBrowserRouter(
@@ -25,6 +26,8 @@ function App() {
         <Route path="admin" element={<Admin />}>
           <Route index element={<Dashboard />} />
           <Route path="product/create" element={<AddProduct />} />
+          <Route path="product/edit" element={<EditProduct />} />
+
           <Route path="product/view" element={<AllProduct />} />
           <Route path="product/category" element={<Category />} />
           <Route path="category/create" element={<AddCategory />} />

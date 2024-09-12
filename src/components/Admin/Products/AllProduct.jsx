@@ -203,7 +203,11 @@ export default function AllProduct() {
                       </button>
 
                       <ContentCopyIcon sx={{ color: "orange", fontSize: 14 }} />
-                      <BorderColorIcon sx={{ color: "green", fontSize: 14 }} />
+                      <Link to="/admin/product/edit">
+                        <BorderColorIcon
+                          sx={{ color: "green", fontSize: 14 }}
+                        />
+                      </Link>
                     </div>
                   </TableCell>
                 </TableRow>

@@ -44,7 +44,7 @@ const Admin = () => {
                 <ClearAllIcon />
               </div>
             </div>
-            <ul className="flex gap-4 items-center text-xs font-medium">
+            <ul className="md:flex gap-4 items-center text-xs font-medium hidden">
               <li className=" ">Dashboard</li>
               <li>Order</li>
               <li>Earning</li>
@@ -57,7 +57,7 @@ const Admin = () => {
             </ul>
           </div>
 
-          <div className="flex  items-center gap-3">
+          <div className=" hidden md:flex  items-center gap-3">
             <div className="flex gap-3 ">
               <div className="w-8 h-8 bg-slate-300 rounded-full px-1 relative">
                 <NotificationsActiveIcon />
@@ -66,15 +66,17 @@ const Admin = () => {
                 <EmojiFlagsIcon />
               </div>
             </div>
-            <div className="flex flex-col items-end  ">
-              <p className="text-xs font-semibold ">Swornim Shrestha.</p>
-              <h1 className="text-xs font-medium text-blue-300">admin</h1>
+            <div className="hidden md:flex  gap-4">
+              <div className="flex flex-col items-end  ">
+                <p className="text-xs font-semibold ">Swornim Shrestha.</p>
+                <h1 className="text-xs font-medium text-blue-300">admin</h1>
+              </div>
+              <img
+                className="w-10 h-10 rounded-full"
+                src="https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt=""
+              />
             </div>
-            <img
-              className="w-10 h-10 rounded-full"
-              src="https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-            />
           </div>
         </div>
 
