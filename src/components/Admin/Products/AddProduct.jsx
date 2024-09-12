@@ -36,7 +36,9 @@ const AddProduct = () => {
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_CATEGORYS}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_PRODUCTSCATEGORYS}`
+        );
         console.log(response.data);
         setFormData((prevFormData) => ({
           ...prevFormData,

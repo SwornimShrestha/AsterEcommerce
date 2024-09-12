@@ -18,12 +18,12 @@ const Products = () => {
     fetchProducts();
   }, []);
   return (
-    <div>
-      <div className="flex flex-wrap w-full mb-7 flex-col items-center text-center">
-        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
+    <div className="mt-7">
+      <div className="flex flex-wrap w-full mb-7 flex-col items-center text-center ">
+        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900 tracking-wide">
           Products
         </h1>
-        <p className="lg:w-1/2 w-full leading-relaxed text-gray-500">
+        <p className="lg:w-1/2 w-full leading-relaxed text-gray-500 font-medium underline underline-offset-8">
           All Products
         </p>
       </div>

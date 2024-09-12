@@ -1,7 +1,4 @@
 import * as React from "react";
-
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Table from "@mui/material/Table";
@@ -19,45 +16,11 @@ import { Link } from "react-router-dom";
 import { Switch } from "@mui/material";
 
 export default function CategoryAllProduct() {
-  const [Product, setProduct] = useState([
-    // {
-    //   id: 1,
-    //   image:
-    //     "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    //   title: "Gray Shirt",
-    //   addedBY: "swornim",
-    //   stock: 100,
-    //   description: "lorem12 Lorem i",
-    //   price: 200,
-    //   category: "Men's ",
-    // },
-    // {
-    //   id: 2,
-    //   image:
-    //     "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    //   title: "Gray Shirt",
-    //   addedBY: "swornim",
-    //   stock: 100,
-    //   description: "lorem12 Lorem i",
-    //   price: 200,
-    //   category: "Men's ",
-    // },
-    // {
-    //   id: 3,
-    //   image:
-    //     "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    //   title: "Gray Shirt",
-    //   addedBY: "swornim",
-    //   stock: 100,
-    //   description: "lorem12 Lorem i",
-    //   price: 200,
-    //   category: "Men's ",
-    // },
-  ]);
+  const [Product, setProduct] = useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_PRODUCTS}`);
+        const response = await axios.get(`${import.meta.env.VITE_CATEGORYS}`);
         console.log(response.data);
         setProduct(response.data);
       } catch (error) {
@@ -69,7 +32,7 @@ export default function CategoryAllProduct() {
 
   const handleDelete = async (productId) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_PRODUCTS}/${productId}`);
+      await axios.delete(`${import.meta.env.VITE_CATEGORYS}/${productId}`);
       console.log(`Product with ID  deleted.`);
       setProduct((prevData) =>
         prevData.filter((data) => data.id !== productId)
@@ -149,8 +112,8 @@ export default function CategoryAllProduct() {
                   <TableCell align="center" component="th" scope="row">
                     <h1>{index + 1}</h1>
                   </TableCell>
-                  <TableCell align="center">{data.productName}</TableCell>
-                  <TableCell align="center">swornim</TableCell>
+                  <TableCell align="center">{data.name}</TableCell>
+                  <TableCell align="center">{data.parentCategory}</TableCell>
 
                   {/* Image cells */}
                   <TableCell
@@ -161,28 +124,28 @@ export default function CategoryAllProduct() {
                   >
                     <img
                       className="w-12 h-12 object-center"
-                      src={data.image}
+                      src={data.banner}
                       alt="Cover Image"
                     />
                   </TableCell>
                   <TableCell align="center">
                     <img
                       className="w-12 h-12 object-center"
-                      src={data.image}
+                      src={data.icon}
                       alt="Cover Image"
                     />
                   </TableCell>
                   <TableCell align="left">
                     <img
                       className="w-12 h-12 object-center"
-                      src={data.image}
+                      src={data.coverImage}
                       alt="Cover Image"
                     />
                   </TableCell>
 
                   {/* Featured switch */}
                   <TableCell align="center">
-                    <Switch checked={data.isFeatured} color="success" />
+                    <Switch checked={data.featured} color="success" />
                   </TableCell>
 
                   {/* Options buttons */}

@@ -1,3 +1,4 @@
+import { Select } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -10,14 +11,14 @@ const AddCategory = () => {
     banner: "",
     icon: "",
     coverImage: "",
-    description: "",
+    metaDescription: "",
   });
 
   useEffect(() => {
     const fetchCategory = async () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_CATEGORYS}`);
-        setCategories(response.data[0].category || []);
+        setCategories(response.data);
       } catch (error) {
         console.error("Error occurred:", error);
       }
@@ -36,7 +37,6 @@ const AddCategory = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    // Add submit logic here
   };
 
   return (
@@ -54,14 +54,17 @@ const AddCategory = () => {
             className="outline-none w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
           />
           <label className="block text-gray-700 font-normal mb-2">Type</label>
-          <input
+          <select
             onChange={handleChange}
             name="type"
             value={formData.type}
             type="text"
             placeholder="type"
-            className="outline-none w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
-          />
+            className="outline-none  w-full px-3 py-2  border border-gray-300 rounded-lg col-span-2"
+          >
+            <option value="Physical">Physical</option>
+            <option value="Digital">Digital</option>
+          </select>
           <label className="block text-gray-700 font-normal mb-2">
             Parent Category
           </label>
@@ -71,23 +74,18 @@ const AddCategory = () => {
             value={formData.category}
             className="outline-none w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
           >
-            <option value="">No Parent</option>
-            {categories.map((ParentCategory) => (
-              <>
-                <option value={ParentCategory.id}>{ParentCategory.name}</option>
-                {ParentCategory.subcategories.map((ParentSubCategory) => (
-                  <>
-                    <option value={ParentSubCategory.id} className="pl-4">
-                      --{ParentSubCategory.name}
-                    </option>
-                    {ParentSubCategory.subcategories.map((SubSubCategory) => (
-                      <option value={SubSubCategory.id} className="pl-8">
-                        --- {SubSubCategory.name}
-                      </option>
-                    ))}
-                  </>
-                ))}
-              </>
+            <option value="Null">No Parent</option>
+            {categories.map((category) => (
+              <option
+                key={category.id}
+                value={
+                  category.parentCategory ? category.parentCategory.id : "null"
+                }
+              >
+                {category.parentCategory
+                  ? category.parentCategory.name
+                  : "No Parent Category"}
+              </option>
             ))}
           </select>
 
@@ -128,8 +126,8 @@ const AddCategory = () => {
           </label>
           <textarea
             onChange={handleChange}
-            name="description"
-            value={formData.description}
+            name="metaDescription"
+            value={formData.metaDescription}
             rows="8"
             placeholder="description"
             className="w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
