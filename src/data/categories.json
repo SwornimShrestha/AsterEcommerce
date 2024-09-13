@@ -1,0 +1,73 @@
+{
+      "category": [
+        {
+          "id": "electronics",
+          "name": "Electronics",
+          "subcategories": [
+            {
+              "id": "mobile-phones",
+              "name": "Mobile Phones",
+              "subcategories": [
+                {
+                  "id": "smartphones",
+                  "name": "Smartphones"
+                },
+                {
+                  "id": "feature-phones",
+                  "name": "Feature Phones"
+                }
+              ]
+            },
+            {
+              "id": "laptops",
+              "name": "Laptops",
+              "subcategories": [
+                {
+                  "id": "gaming-laptops",
+                  "name": "Gaming Laptops"
+                },
+                {
+                  "id": "ultrabooks",
+                  "name": "Ultrabooks"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fashion",
+          "name": "Fashion",
+          "subcategories": [
+            {
+              "id": "mens-clothing",
+              "name": "Men's Clothing",
+              "subcategories": [
+                {
+                  "id": "shirts",
+                  "name": "Shirts"
+                },
+                {
+                  "id": "trousers",
+                  "name": "Trousers"
+                }
+              ]
+            },
+            {
+              "id": "womens-clothing",
+              "name": "Women's Clothing",
+              "subcategories": [
+                {
+                  "id": "dresses",
+                  "name": "Dresses"
+                },
+                {
+                  "id": "skirts",
+                  "name": "Skirts"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    

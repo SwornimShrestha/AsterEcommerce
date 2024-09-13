@@ -16,15 +16,31 @@ const ProductCard = ({ products = [] }) => {
                 <img
                   alt="ecommerce"
                   className="object-cover object-center w-full h-full"
-                  src={product.image}
+                  src={product.imageUrl}
                 />
               </div>
               <div className="mt-4 text-center">
                 <h3 className="text-gray-500 text-xs tracking-widest uppercase font-medium mb-1">
-                  {product.category.join(" | ")}
+                  {product.productCategory.parentCategory.name}
+                  {product.productCategory.childrenCategory && (
+                    <>
+                      {" > "}
+                      {product.productCategory.childrenCategory.name}
+                      {product.productCategory.childrenCategory
+                        .childrenCategoryChild && (
+                        <>
+                          {" > "}
+                          {product.productCategory.childrenCategory.childrenCategoryChild
+                            .map((child) => child.name)
+                            .join(" > ")}
+                        </>
+                      )}
+                    </>
+                  )}
                 </h3>
+                  
                 <h2 className="text-gray-900 title-font text-lg font-medium">
-                  {product.title}
+                  {product.productName}
                 </h2>
                 <p className="mt-1 text-green-500 font-semibold text-base">
                   NRS {product.price}

@@ -49,13 +49,10 @@ const ProductDetails = () => {
             <img
               alt="ecommerce"
               className="w-full h-auto object-cover rounded-lg shadow-lg"
-              src={product.image}
+              src={product.imageUrl}
             />
           </div>
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6">
-            <h2 className="text-sm title-font text-gray-600 tracking-widest uppercase">
-              {product.category}
-            </h2>
             <h1 className="text-gray-900 text-4xl font-bold mb-3">
               {product.productName}
             </h1>
@@ -79,32 +76,10 @@ const ProductDetails = () => {
               </span>
             </div>
             <p className="leading-relaxed mb-4">{product.description}</p>
-            <div className="flex items-center mb-4">
-              <span className="mr-3 text-lg font-medium">Color:</span>
-              {["#000000", "#717171", "#4F46E5"].map((color, index) => (
-                <button
-                  key={index}
-                  style={{ backgroundColor: color }}
-                  className={`w-6 h-6 border-2 border-gray-300 rounded-full focus:outline-none ${
-                    color === "#4F46E5"
-                      ? "ring-2 ring-offset-2 ring-indigo-500"
-                      : ""
-                  }`}
-                ></button>
-              ))}
-            </div>
-            <div className="flex items-center mb-6">
-              <span className="mr-3 text-lg font-medium">Size:</span>
-              <select className="border border-gray-300 rounded-md py-2 px-3 text-gray-700 focus:ring-2 focus:ring-indigo-500">
-                <option>SM</option>
-                <option>M</option>
-                <option>L</option>
-                <option>XL</option>
-              </select>
-            </div>
+
             <div className="flex justify-between items-center">
               <span className="text-2xl font-semibold text-gray-900">
-                NRS {product.price}
+                NRS 2000
               </span>
               <div className="flex space-x-2">
                 <button
