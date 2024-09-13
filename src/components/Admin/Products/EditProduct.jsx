@@ -5,16 +5,20 @@ import { v4 as uuidv4 } from "uuid";
 import AddProductNavbar from "./AddProductNavbar";
 import JoditEditor from "jodit-react";
 
-const EditProduct = () => {
-  const [parentCategoryVisible, setParentCategoryVisible] = useState(true);
-  const [subParentCategoryVisible, setSubParentCategoryVisible] =
-    useState(true);
-  const toogleParentCategory = () => {
-    setParentCategoryVisible(!parentCategoryVisible);
-  };
+import { Switch } from "@mui/material";
+import categoryData from "../../../data/categories.json";
+import { useParams } from "react-router-dom";
 
-  const toogleSubParentCategory = () => {
-    setSubParentCategoryVisible(!subParentCategoryVisible);
+const EditProduct = () => {
+  const { id } = useParams();
+  const [categories, setCategories] = useState(categoryData.category);
+  const [toggleStates, setToggleStates] = useState({});
+
+  const handleToggleParentCat = (categoryId) => {
+    setToggleStates((prevStates) => ({
+      ...prevStates,
+      [categoryId]: !prevStates[categoryId],
+    }));
   };
 
   const editor = useRef(null);
@@ -27,58 +31,79 @@ const EditProduct = () => {
     minPurchaseQty: "",
     barcode: "",
     description: "",
+    price: "",
     tax: "",
     vat: "",
     image: "",
+    refundable: false,
     category: [],
   });
 
   useEffect(() => {
-    const fetchCategory = async () => {
+    const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_PRODUCTSCATEGORYS}`
+          `${import.meta.env.VITE_PRODUCTS}${id}`
         );
-        console.log(response.data);
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          category: response.data[0].category,
-        }));
+
+        const productData = response.data;
+        console.log(productData);
+        setFormData({
+          id: productData.id || uuidv4(),
+          productName: productData.productName || "",
+          brand: productData.brand || "",
+          unit: productData.unit || "",
+          weight: productData.weight || "",
+          minPurchaseQty: productData.minPurchaseQty || "",
+          barcode: productData.barcode || "",
+          description: productData.description || "",
+          price: productData.price || "",
+          tax: productData.tax || "",
+          vat: productData.vat || "",
+          image: productData.image || "",
+          refundable: productData.refundable || false,
+          category: productData.category || [],
+        });
       } catch (error) {
-        console.error("Error Occured:", error);
+        console.error("Error fetching the product data:", error);
       }
     };
-    fetchCategory();
-  }, []);
+    fetchData();
+  }, [id]);
 
   const handleChange = (e) => {
-    const { name, value, checked } = e.target;
+    const { name, value } = e.target;
 
-    if (name === "category") {
-      setFormData((prevFormData) => {
-        const updatedCategories = checked
-          ? [...prevFormData.category, value]
-          : prevFormData.category.filter((category) => category !== value);
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-        return {
-          ...prevFormData,
-          category: updatedCategories,
-        };
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+  const handleRefundableChange = (e) => {
+    setFormData({
+      ...formData,
+      refundable: e.target.checked,
+    });
+  };
+
+  const handleCategoryChange = (e, categoryId) => {
+    const { checked } = e.target;
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      category: checked
+        ? [...prevFormData.category, categoryId]
+        : prevFormData.category.filter((id) => id !== categoryId),
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_PRODUCTS}`,
+      const response = await axios.put(
+        `${import.meta.env.VITE_PRODUCTS}${formData.id}`,
         formData,
         {
           headers: {
@@ -95,16 +120,19 @@ const EditProduct = () => {
         minPurchaseQty: "",
         barcode: "",
         description: "",
+        price: "",
         tax: "",
         vat: "",
         image: "",
-        category: "",
+        refundable: false,
       });
-      alert("Form Submitted", response.data);
+
+      alert("Product updated successfully", response.data);
     } catch (error) {
-      console.error("There was an error submitting the form:", error);
+      console.error("There was an error updating the product:", error);
     }
   };
+
   return (
     <div className="mt-6 ">
       <div className="mb-6">
@@ -114,13 +142,13 @@ const EditProduct = () => {
         <div className="mr-9">
           <AddProductNavbar />
         </div>
-        <div className=" pt-12">
+        <div className=" w-full  pt-12 mr-3">
           {" "}
           <h1 className="font-bold text-base   mb-2"> Product Information</h1>
           {/* Add Form */}
-          <div className="container  mb-20  bg-white rounded-lg  pr-12 ">
-            <div className="grid  grid-cols-3 gap-2">
-              <div className="grid grid-cols-3 col-span-2 gap-3 ">
+          <div className="w-full mb-20 rounded-lg">
+            <div className="grid  md:grid-cols-3  gap-2">
+              <div className="col-span-1 grid grid-cols-3  md:col-span-2 gap-3 ">
                 <label className="block text-gray-700 font-normal mb-2">
                   Product Name <span className="text-red-600">*</span>
                 </label>
@@ -202,92 +230,84 @@ const EditProduct = () => {
                 <label className="block text-gray-700 font-normal mr-4">
                   Refundable
                 </label>
-                <div className=" flex w-10 bg-slate-200 h-5 rounded-full">
-                  <span className="w-5 h-5 bg-gray-400 rounded-full"></span>
-                </div>
+                <Switch
+                  color="success"
+                  checked={formData.refundable}
+                  onChange={handleRefundableChange}
+                />
               </div>
               {/* Product Category */}
-              <div className=" shadow-lg p-3 grid grid-cols-1 col-span-1 max-h-80 ml-4 ">
+              <div className="col-span-1 md:col-span-1 shadow-lg p-3 grid grid-cols-1   max-h-80  ">
                 <div className="overflow-y-auto">
                   <h3 className="text-base  font-semibold text-gray-700 sticky top-0 bg-white z-10 h-9">
                     Product Category
                   </h3>
-                  <div className="flex flex-col gap-1">
-                    {formData.category.map((category) => (
+                  {categories &&
+                    categories.map((category) => (
                       <div key={category.id}>
-                        <label className="flex  items-center ">
-                          <h1
-                            className="mr-2 mt-[-8px] cursor-pointer"
-                            onClick={toogleParentCategory}
+                        <div className="flex items-center gap-1 ">
+                          <button
+                            onClick={() => handleToggleParentCat(category.id)}
                           >
-                            {parentCategoryVisible ? "-" : "+"}
-                          </h1>
+                            {toggleStates[category.id] ? "+" : "-"}
+                          </button>
                           <input
                             type="checkbox"
-                            name="category"
-                            value={category.name}
-                            onChange={handleChange}
-                            className="mr-2"
+                            checked={
+                              formData.category?.includes(category.id) || false
+                            }
+                            onChange={(e) =>
+                              handleCategoryChange(e, category.id)
+                            }
                           />
-                          {category.name}
-                        </label>
-
-                        {parentCategoryVisible &&
-                          category.subcategories &&
-                          category.subcategories.length > 0 && (
-                            <div className="ml-4">
-                              {category.subcategories.map((subcategory) => (
-                                <div key={subcategory.id}>
-                                  <label className="flex items-center">
-                                    <h1
-                                      className="mr-2 mt-[-8px] cursor-pointer"
-                                      onClick={toogleSubParentCategory}
+                          <label>{category.name}</label>
+                        </div>
+                        {/* Render subcategories if needed */}
+                        {!toggleStates[category.id] &&
+                          category.subcategories && (
+                            <div style={{ marginLeft: "20px" }}>
+                              {category.subcategories.map((sub) => (
+                                <div key={sub.id}>
+                                  <input
+                                    type="checkbox"
+                                    checked={
+                                      formData.category?.includes(sub.id) ||
+                                      false
+                                    }
+                                    onChange={(e) =>
+                                      handleCategoryChange(e, sub.id)
+                                    }
+                                  />
+                                  <label>{sub.name}</label>
+                                  {sub.subcategories?.map((subb) => (
+                                    <div
+                                      key={subb.id}
+                                      style={{ marginLeft: "20px" }}
                                     >
-                                      {subParentCategoryVisible ? "=" : "+"}
-                                    </h1>
-                                    <input
-                                      type="checkbox"
-                                      name="category"
-                                      value={subcategory.name}
-                                      onChange={handleChange}
-                                      className="mr-2"
-                                    />
-                                    {subcategory.name}
-                                  </label>
-                                  {subParentCategoryVisible &&
-                                    subcategory.subcategories &&
-                                    subcategory.subcategories.length > 0 && (
-                                      <div className="ml-4">
-                                        {subcategory.subcategories.map(
-                                          (nestedSubcategory) => (
-                                            <label
-                                              key={nestedSubcategory.id}
-                                              className="flex items-center ml-5"
-                                            >
-                                              <input
-                                                type="checkbox"
-                                                name="category"
-                                                value={nestedSubcategory.name}
-                                                onChange={handleChange}
-                                                className="mr-2"
-                                              />
-                                              {nestedSubcategory.name}
-                                            </label>
-                                          )
-                                        )}
-                                      </div>
-                                    )}
+                                      <input
+                                        type="checkbox"
+                                        checked={
+                                          formData.category?.includes(
+                                            subb.id
+                                          ) || false
+                                        }
+                                        onChange={(e) =>
+                                          handleCategoryChange(e, subb.id)
+                                        }
+                                      />
+                                      <label>{subb.name}</label>
+                                    </div>
+                                  ))}
                                 </div>
                               ))}
                             </div>
                           )}
                       </div>
                     ))}
-                  </div>
                 </div>
               </div>
-
-              <div className="col-span-3 mt-8">
+              {/* description */}
+              <div className="col-span-1 md:col-span-3 mt-8">
                 <label
                   className="block text-gray-700 font-normal mb-2"
                   htmlFor="description"
@@ -296,10 +316,35 @@ const EditProduct = () => {
                 </label>
                 <JoditEditor
                   ref={editor}
-                  onChange={handleChange}
+                  onChange={(newContent) => {
+                    setFormData({
+                      ...formData,
+                      description: newContent,
+                    });
+                  }}
                   name="description"
                   value={formData.description}
                 />
+              </div>
+            </div>
+
+            <div>
+              <h1 className="font-bold text-base mt-8">Price</h1>
+
+              <div className="grid grid-cols-2 gap-6 mt-6">
+                <div>
+                  <label className="block text-gray-700 font-normal mb-2">
+                    Price
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    name="price"
+                    value={formData.price}
+                    type="number"
+                    placeholder="xx"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                  />
+                </div>
               </div>
             </div>
             <div>

@@ -16,43 +16,10 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Switch } from "@mui/material";
 
 export default function AllProduct() {
-  const [Product, setProduct] = useState([
-    // {
-    //   id: 1,
-    //   image:
-    //     "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    //   title: "Gray Shirt",
-    //   addedBY: "swornim",
-    //   stock: 100,
-    //   description: "lorem12 Lorem i",
-    //   price: 200,
-    //   category: "Men's ",
-    // },
-    // {
-    //   id: 2,
-    //   image:
-    //     "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    //   title: "Gray Shirt",
-    //   addedBY: "swornim",
-    //   stock: 100,
-    //   description: "lorem12 Lorem i",
-    //   price: 200,
-    //   category: "Men's ",
-    // },
-    // {
-    //   id: 3,
-    //   image:
-    //     "https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    //   title: "Gray Shirt",
-    //   addedBY: "swornim",
-    //   stock: 100,
-    //   description: "lorem12 Lorem i",
-    //   price: 200,
-    //   category: "Men's ",
-    // },
-  ]);
+  const [Product, setProduct] = useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -68,7 +35,7 @@ export default function AllProduct() {
 
   const handleDelete = async (productId) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_PRODUCTS}/${productId}`);
+      await axios.delete(`${import.meta.env.VITE_PRODUCTS}${productId}`);
       console.log(`Product with ID  deleted.`);
       setProduct((prevData) =>
         prevData.filter((data) => data.id !== productId)
@@ -160,7 +127,7 @@ export default function AllProduct() {
                         Num of Sale: <span>0 times</span>{" "}
                       </h3>
                       <h3>
-                        Base Price: Rs<span>{data.minPurchaseQty}</span>{" "}
+                        Base Price: Rs<span>{data.price}</span>{" "}
                       </h3>
 
                       <h3>
@@ -169,25 +136,17 @@ export default function AllProduct() {
                     </div>
                   </TableCell>
                   <TableCell align="right">
-                    <div className=" flex w-10 bg-slate-200 h-5 rounded-full">
-                      <span className="w-5 h-5 bg-gray-400 rounded-full"></span>
-                    </div>
+                    <Switch color="success" />
                   </TableCell>
                   <TableCell align="right">
                     {" "}
-                    <div className=" flex justify-end w-10 bg-slate-200 h-5 rounded-full">
-                      <span className="w-5 h-5 bg-green-400 rounded-full"></span>
-                    </div>
+                    <Switch color="success" />
                   </TableCell>
                   <TableCell align="right" sx={{ color: "green" }}>
-                    <div className=" flex w-10 bg-slate-200 h-5 rounded-full">
-                      <span className="w-5 h-5 bg-gray-400 rounded-full"></span>
-                    </div>{" "}
+                    <Switch color="success" />
                   </TableCell>
                   <TableCell align="center">
-                    <div className=" flex justify-end w-10 bg-slate-200 h-5 rounded-full">
-                      <span className="w-5 h-5 bg-green-400 rounded-full"></span>
-                    </div>
+                    <Switch color="success" />
                   </TableCell>
                   <TableCell align="center">
                     <div className="flex items-center gap-2 ">
@@ -203,7 +162,7 @@ export default function AllProduct() {
                       </button>
 
                       <ContentCopyIcon sx={{ color: "orange", fontSize: 14 }} />
-                      <Link to="/admin/product/edit">
+                      <Link to={`/admin/product/edit/${data.id}`}>
                         <BorderColorIcon
                           sx={{ color: "green", fontSize: 14 }}
                         />

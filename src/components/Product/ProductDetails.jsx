@@ -49,7 +49,7 @@ const ProductDetails = () => {
             <img
               alt="ecommerce"
               className="w-full h-auto object-cover rounded-lg shadow-lg"
-              src={product.imageUrl}
+              src={product.image}
             />
           </div>
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6">
@@ -79,7 +79,7 @@ const ProductDetails = () => {
 
             <div className="flex justify-between items-center">
               <span className="text-2xl font-semibold text-gray-900">
-                NRS 2000
+                NRS {product.price}
               </span>
               <div className="flex space-x-2">
                 <button
