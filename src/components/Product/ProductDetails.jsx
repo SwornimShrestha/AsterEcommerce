@@ -53,6 +53,12 @@ const ProductDetails = () => {
             />
           </div>
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6">
+            <h3 className="text-gray-500 text-xs tracking-widest uppercase font-medium mb-1 flex flex-wrap">
+              {product.category.map((cat, index) => (
+                <div key={index}>{cat} | </div>
+              ))}
+            </h3>
+
             <h1 className="text-gray-900 text-4xl font-bold mb-3">
               {product.productName}
             </h1>
@@ -76,7 +82,6 @@ const ProductDetails = () => {
               </span>
             </div>
             <p className="leading-relaxed mb-4">{product.description}</p>
-
             <div className="flex justify-between items-center">
               <span className="text-2xl font-semibold text-gray-900">
                 NRS {product.price}

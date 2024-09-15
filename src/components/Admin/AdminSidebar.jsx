@@ -33,17 +33,16 @@ const AdminSidebar = () => {
         />
       </div>
       {/* Dashboard */}
-      <div className="text-gray-300 text-base font-semibold    ">
-        <ul className="cursor-pointer">
-          <Link to="">
-            <li className="flex items-center gap-2 mb-3">
-              <GridViewIcon sx={{ fontSize: 20, color: "gray " }} />
-              Dashboard
-            </li>
+      <div className="text-gray-300 text-base font-semibold">
+        <ul className="cursor-pointer flex flex-col">
+          <Link to="" className="flex items-center gap-2 mb-3">
+            <GridViewIcon sx={{ fontSize: 20, color: "gray" }} />
+            Dashboard
           </Link>
-          <li className="flex items-center justify-between  mb-3">
+
+          <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <InventoryIcon sx={{ fontSize: 20, color: "gray " }} />
+              <InventoryIcon sx={{ fontSize: 20, color: "gray" }} />
               Product
             </div>
             <button onClick={toggleChange}>
@@ -51,30 +50,37 @@ const AdminSidebar = () => {
                 <KeyboardArrowDownIcon sx={{ fontSize: 20, color: "gray" }} />
               ) : (
                 <KeyboardArrowUpIcon sx={{ fontSize: 20, color: "gray" }} />
-              )}{" "}
+              )}
             </button>
-          </li>
+          </div>
+
           {toggleProduct && (
-            <ul className="list-disc ml-8 ">
-              <li className="mb-1 text-sm text-gray-400">
-                {" "}
-                <Link to="/admin/product/create">Add New Product</Link>
-              </li>
-              <li className="mb-1 text-sm text-gray-400">
-                <Link to="/admin/product/view">View All Product</Link>
-              </li>
-              <li className="mb-1 text-sm text-gray-400">Brand</li>
-              <li className="mb-1 text-sm text-gray-400">
-                <Link to="/admin/product/category">Category</Link>
-              </li>
+            <ul className="list-disc ml-8 flex flex-col">
+              <Link
+                to="/admin/product/create"
+                className="mb-1 text-sm text-gray-400"
+              >
+                Add New Product
+              </Link>
+              <Link
+                to="/admin/product/view"
+                className="mb-1 text-sm text-gray-400"
+              >
+                View All Product
+              </Link>
+              <Link
+                to="/admin/product/category"
+                className="mb-1 text-sm text-gray-400"
+              >
+                Category
+              </Link>
             </ul>
           )}
-          <li className="flex items-center gap-2 mb-3">
-            <Link to="/">
-              <LogoutIcon sx={{ fontSize: 20, color: "gray " }} />
-              Home
-            </Link>
-          </li>
+
+          <Link to="/" className="flex items-center gap-2 mb-3">
+            <LogoutIcon sx={{ fontSize: 20, color: "gray" }} />
+            Home
+          </Link>
         </ul>
       </div>
     </section>

@@ -113,7 +113,9 @@ export default function CategoryAllProduct() {
                     <h1>{index + 1}</h1>
                   </TableCell>
                   <TableCell align="center">{data.name}</TableCell>
-                  <TableCell align="center">{data.parentCategory}</TableCell>
+                  <TableCell align="center">
+                    {data.parentCategory.name}
+                  </TableCell>
 
                   {/* Image cells */}
                   <TableCell
