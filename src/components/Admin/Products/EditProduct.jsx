@@ -4,15 +4,17 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import AddProductNavbar from "./AddProductNavbar";
 import JoditEditor from "jodit-react";
-
-import { Switch } from "@mui/material";
+import { Switch, TextField } from "@mui/material";
 import categoryData from "../../../data/categories.json";
 import { useParams } from "react-router-dom";
+
+import { toast } from "react-toastify";
 
 const EditProduct = () => {
   const { id } = useParams();
   const [categories, setCategories] = useState(categoryData.category);
   const [toggleStates, setToggleStates] = useState({});
+  const [errors, setErrors] = useState({});
 
   const handleToggleParentCat = (categoryId) => {
     setToggleStates((prevStates) => ({
@@ -98,9 +100,49 @@ const EditProduct = () => {
     }));
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+    let isValid = true;
+
+    if (!formData.productName) {
+      isValid = false;
+      newErrors.productName = "Product Name is required";
+    }
+    if (!formData.brand) {
+      isValid = false;
+      newErrors.brand = "Brand is required";
+    }
+    if (!formData.unit) {
+      isValid = false;
+      newErrors.unit = "Unit is required";
+    }
+    if (!formData.weight) {
+      isValid = false;
+      newErrors.weight = "Weight is required";
+    }
+    if (!formData.minPurchaseQty) {
+      isValid = false;
+      newErrors.minPurchaseQty = "Minimum Purchase Qty is required";
+    }
+
+    if (!formData.image) {
+      isValid = false;
+      newErrors.image = "Image URL is required";
+    }
+    if (!formData.price) {
+      isValid = false;
+      newErrors.price = "Price is required";
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    if (!validateForm()) {
+      return;
+    }
     try {
       const response = await axios.put(
         `${import.meta.env.VITE_PRODUCTS}${formData.id}`,
@@ -111,23 +153,8 @@ const EditProduct = () => {
           },
         }
       );
-      setFormData({
-        id: uuidv4(),
-        productName: "",
-        brand: "",
-        unit: "",
-        weight: "",
-        minPurchaseQty: "",
-        barcode: "",
-        description: "",
-        price: "",
-        tax: "",
-        vat: "",
-        image: "",
-        refundable: false,
-      });
 
-      alert("Product updated successfully", response.data);
+      toast.success("Product updated successfully", response.data);
     } catch (error) {
       console.error("There was an error updating the product:", error);
     }
@@ -148,78 +175,90 @@ const EditProduct = () => {
           {/* Add Form */}
           <div className="w-full mb-20 rounded-lg">
             <div className="grid  md:grid-cols-3  gap-2">
-              <div className="col-span-1 grid grid-cols-3  md:col-span-2 gap-3 ">
+              <div className="col-span-1 grid grid-cols-3  md:col-span-2 gap-3  pr-4">
                 <label className="block text-gray-700 font-normal mb-2">
                   Product Name <span className="text-red-600">*</span>
                 </label>
-                <input
+                <TextField
                   onChange={handleChange}
                   name="productName"
                   value={formData.productName}
                   type="text"
                   placeholder="title"
                   className=" outline-none w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
+                  error={!!errors.productName}
+                  helperText={errors.productName}
                 />
                 <label className="block text-gray-700 font-normal mb-2">
                   Brand <span className="text-red-600">*</span>
                 </label>
-                <input
+                <TextField
                   onChange={handleChange}
                   name="brand"
                   value={formData.brand}
                   type="text"
                   placeholder="title"
                   className=" outline-none w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
+                  error={!!errors.brand}
+                  helperText={errors.brand}
                 />{" "}
                 <label className="block text-gray-700 font-normal mb-2">
                   Unit <span className="text-red-600">*</span>
                 </label>
-                <input
+                <TextField
                   onChange={handleChange}
                   name="unit"
                   value={formData.unit}
                   type="text"
                   placeholder="unit"
                   className=" outline-none w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
+                  error={!!errors.unit}
+                  helperText={errors.unit}
                 />
                 <label className="block text-gray-700 font-normal mb-2">
                   Image <span className="text-red-600">*</span>
                 </label>
-                <input
+                <TextField
                   onChange={handleChange}
                   name="image"
                   value={formData.image}
                   type="text"
                   placeholder="put image url"
                   className="outline-none w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
+                  error={!!errors.image}
+                  helperText={errors.image}
                 />{" "}
                 <label className="block text-gray-700 font-normal mb-2">
                   Weight(inkg) <span className="text-red-600">*</span>
                 </label>
-                <input
+                <TextField
                   onChange={handleChange}
                   name="weight"
                   value={formData.weight}
                   type="text"
                   placeholder="title"
                   className="outline-none w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
+                  error={!!errors.weight}
+                  helperText={errors.weight}
                 />{" "}
                 <label className="block text-gray-700 font-normal mb-2">
                   Minimum <br />
                   Purchase Qty <span className="text-red-600">*</span>
                 </label>
-                <input
+                <TextField
                   onChange={handleChange}
                   name="minPurchaseQty"
                   value={formData.minPurchaseQty}
                   type="text"
                   placeholder="title"
                   className="outline-none w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
+                  error={!!errors.minPurchaseQty}
+                  helperText={errors.minPurchaseQty}
                 />{" "}
                 <label className="block text-gray-700 font-normal mb-2">
                   Barcode<span className="text-red-600">*</span>
                 </label>
-                <input
+                <TextField
                   onChange={handleChange}
                   name="barcode"
                   value={formData.barcode}
@@ -336,13 +375,15 @@ const EditProduct = () => {
                   <label className="block text-gray-700 font-normal mb-2">
                     Price
                   </label>
-                  <input
+                  <TextField
                     onChange={handleChange}
                     name="price"
                     value={formData.price}
                     type="number"
                     placeholder="xx"
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                    error={!!errors.price}
+                    helperText={errors.price}
                   />
                 </div>
               </div>
@@ -355,7 +396,7 @@ const EditProduct = () => {
                   <label className="block text-gray-700 font-normal mb-2">
                     Tax
                   </label>
-                  <input
+                  <TextField
                     onChange={handleChange}
                     name="tax"
                     value={formData.tax}
@@ -369,7 +410,7 @@ const EditProduct = () => {
                   <label className="block text-gray-700 font-normal mb-2">
                     VAT
                   </label>
-                  <input
+                  <TextField
                     onChange={handleChange}
                     name="vat"
                     value={formData.vat}
