@@ -147,7 +147,7 @@ const AddProduct = () => {
           <h1 className="font-bold text-base mb-2">Product Information</h1>
           <div className="w-full mb-20 rounded-lg">
             <div className="grid md:grid-cols-3 gap-4">
-              <div className="col-span-1 grid grid-cols-3 md:col-span-2 gap-3 ">
+              <div className="col-span-1 grid grid-cols-3 md:col-span-2 gap-3  pr-6">
                 <label className="block text-gray-700 font-normal mb-2">
                   Product Name <span className="text-red-600">*</span>
                 </label>
