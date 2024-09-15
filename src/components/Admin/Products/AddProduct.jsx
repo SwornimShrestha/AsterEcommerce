@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import AddProductNavbar from "./AddProductNavbar";
 import JoditEditor from "jodit-react";
 
+import { toast } from "react-toastify";
 import { Switch } from "@mui/material";
 import categoryData from "../../../data/categories.json";
 
@@ -93,7 +94,7 @@ const AddProduct = () => {
         refundable: false,
       });
 
-      alert("Form Submitted", response.data);
+      toast.success("Form Submitted");
     } catch (error) {
       console.error("There was an error submitting the form:", error);
     }
@@ -144,7 +145,7 @@ const AddProduct = () => {
                   onChange={handleChange}
                   name="unit"
                   value={formData.unit}
-                  type="text"
+                  type="number"
                   placeholder="unit"
                   className=" outline-none w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
                 />
@@ -166,7 +167,7 @@ const AddProduct = () => {
                   onChange={handleChange}
                   name="weight"
                   value={formData.weight}
-                  type="text"
+                  type="number"
                   placeholder="title"
                   className="outline-none w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
                 />{" "}
@@ -178,7 +179,7 @@ const AddProduct = () => {
                   onChange={handleChange}
                   name="minPurchaseQty"
                   value={formData.minPurchaseQty}
-                  type="text"
+                  type="number"
                   placeholder="title"
                   className="outline-none w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
                 />{" "}

@@ -11,7 +11,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import { toast } from "react-toastify";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -36,7 +36,7 @@ export default function AllProduct() {
   const handleDelete = async (productId) => {
     try {
       await axios.delete(`${import.meta.env.VITE_PRODUCTS}${productId}`);
-      console.log(`Product with ID  deleted.`);
+      toast.error(`Product   deleted.`);
       setProduct((prevData) =>
         prevData.filter((data) => data.id !== productId)
       );

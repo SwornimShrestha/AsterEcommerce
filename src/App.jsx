@@ -16,6 +16,9 @@ import ProductDetails from "./components/Product/ProductDetails";
 import Dashboard from "./components/Admin/Dashboard";
 import EditProduct from "./components/Admin/Products/EditProduct";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -39,6 +42,18 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }
