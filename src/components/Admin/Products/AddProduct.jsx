@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import AddProductNavbar from "./AddProductNavbar";
 import JoditEditor from "jodit-react";
 import { toast } from "react-toastify";
-import { Checkbox, Switch, TextField } from "@mui/material";
+import { Switch, TextField } from "@mui/material";
 import categoryData from "../../../data/categories.json";
 
 const AddProduct = () => {
@@ -146,8 +146,8 @@ const AddProduct = () => {
         <div className="w-full pt-12 mr-3">
           <h1 className="font-bold text-base mb-2">Product Information</h1>
           <div className="w-full mb-20 rounded-lg">
-            <div className="grid md:grid-cols-3 gap-2">
-              <div className="col-span-1 grid grid-cols-3 md:col-span-2 gap-3">
+            <div className="grid md:grid-cols-3 gap-4">
+              <div className="col-span-1 grid grid-cols-3 md:col-span-2 gap-3 ">
                 <label className="block text-gray-700 font-normal mb-2">
                   Product Name <span className="text-red-600">*</span>
                 </label>
@@ -157,7 +157,7 @@ const AddProduct = () => {
                   value={formData.productName}
                   type="text"
                   placeholder="title"
-                  className="outline-none w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
+                  className="outline-none  w-full px-3 py-2 border border-gray-300 rounded-lg col-span-2"
                   error={!!errors.productName}
                   helperText={errors.productName}
                 />
