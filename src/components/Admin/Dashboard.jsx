@@ -17,7 +17,7 @@ const Dashboard = () => {
               <span className="w-4 h-2 rounded-full bg-red-500 inline-block mr-2"></span>
               <p className="text-gray-700">Cellphones & Tabs</p>
             </div>
-            <p className="text-gray-800 font-semibold">$1,494.000</p>
+            <p className="text-gray-800 font-semibold">NRs1,494.000</p>
           </div>
 
           <div className="flex justify-between items-center mt-2">
@@ -25,7 +25,7 @@ const Dashboard = () => {
               <span className="w-4 h-2 rounded-full bg-yellow-500 inline-block mr-2"></span>
               <p className="text-gray-700">Men Clothing & Fas</p>
             </div>
-            <p className="text-gray-800 font-semibold">$1,415.850</p>
+            <p className="text-gray-800 font-semibold">NRs1,415.850</p>
           </div>
 
           <div className="flex justify-between items-center mt-2">
@@ -33,7 +33,7 @@ const Dashboard = () => {
               <span className="w-4 h-2 rounded-full bg-blue-500 inline-block mr-2"></span>
               <p className="text-gray-700">Computer & Access</p>
             </div>
-            <p className="text-gray-800 font-semibold">$1,415.230</p>
+            <p className="text-gray-800 font-semibold">NRs1,415.230</p>
           </div>
         </div>
       </div>

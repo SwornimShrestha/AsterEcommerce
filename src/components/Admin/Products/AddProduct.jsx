@@ -12,6 +12,12 @@ const AddProduct = () => {
   const [toggleStates, setToggleStates] = useState({});
   const [errors, setErrors] = useState({});
 
+  const handleToggleParentCat = (categoryId) => {
+    setToggleStates((prevStates) => ({
+      ...prevStates,
+      [categoryId]: !prevStates[categoryId],
+    }));
+  };
   const editor = useRef(null);
   const [formData, setFormData] = useState({
     id: uuidv4(),
@@ -279,6 +285,7 @@ const AddProduct = () => {
                               {category.subcategories.map((sub) => (
                                 <div key={sub.id}>
                                   <input
+                                    className="mr-auto"
                                     type="checkbox"
                                     checked={
                                       formData.category.includes(sub.id) ||
@@ -295,6 +302,7 @@ const AddProduct = () => {
                                       style={{ marginLeft: "20px" }}
                                     >
                                       <input
+                                        className="mr-auto"
                                         type="checkbox"
                                         checked={
                                           formData.category.includes(subb.id) ||
