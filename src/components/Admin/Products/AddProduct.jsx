@@ -9,8 +9,8 @@ import categoryData from "../../../data/categories.json";
 
 const AddProduct = () => {
   const [categories, setCategories] = useState(categoryData.category);
-  const [toggleStates, setToggleStates] = useState({});
   const [errors, setErrors] = useState({});
+  const [toggleStates, setToggleStates] = useState({});
 
   const handleToggleParentCat = (categoryId) => {
     setToggleStates((prevStates) => ({
@@ -266,7 +266,7 @@ const AddProduct = () => {
                           <button
                             onClick={() => handleToggleParentCat(category.id)}
                           >
-                            {toggleStates[category.id] ? "+" : "-"}
+                            {toggleStates[category.id] ? "-" : "+"}
                           </button>
                           <input
                             type="checkbox"
@@ -279,7 +279,7 @@ const AddProduct = () => {
                           />
                           <label>{category.name}</label>
                         </div>
-                        {!toggleStates[category.id] &&
+                        {toggleStates[category.id] &&
                           category.subcategories && (
                             <div style={{ marginLeft: "20px" }}>
                               {category.subcategories.map((sub) => (
