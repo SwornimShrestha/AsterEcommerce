@@ -95,8 +95,8 @@ export default function AllProduct() {
                 <TableCell align="center" sx={{ width: "60px" }}>
                   Total Deal
                 </TableCell>
-                <TableCell align="left" sx={{ width: "60px" }}>
-                  Published
+                <TableCell align="center" sx={{ width: "60px" }}>
+                  Refundable
                 </TableCell>
                 <TableCell align="center" sx={{ width: "60px" }}>
                   Featured
@@ -135,16 +135,23 @@ export default function AllProduct() {
                       </h3>
                     </div>
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell align="center">
                     <Switch color="success" />
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell align="center">
                     {" "}
                     <Switch color="success" />
                   </TableCell>
-                  <TableCell align="right" sx={{ color: "green" }}>
-                    <Switch color="success" />
+                  <TableCell
+                    align="center"
+                    sx={{ color: data.refundable ? "green" : "red" }}
+                  >
+                    <Switch
+                      color={data.refundable ? "success" : "default"}
+                      checked={data.refundable}
+                    />
                   </TableCell>
+
                   <TableCell align="center">
                     <Switch color="success" />
                   </TableCell>
