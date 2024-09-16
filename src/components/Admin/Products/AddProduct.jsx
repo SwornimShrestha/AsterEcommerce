@@ -139,11 +139,11 @@ const AddProduct = () => {
       <div className="mb-6">
         <h1 className="font-bold text-base ml-3">Add New Product</h1>
       </div>
-      <div className="flex flex-row gap-5">
+      <div className="flex flex-col lg:flex-row gap-5">
         <div className="mr-9">
           <AddProductNavbar />
         </div>
-        <div className="w-full pt-12 mr-3">
+        <div className="w-full p-12 mr-3">
           <h1 className="font-bold text-base mb-2">Product Information</h1>
           <div className="w-full mb-20 rounded-lg">
             <div className="grid md:grid-cols-3 gap-4">
