@@ -61,9 +61,13 @@ const ProductDetails = () => {
                 {product.reviews || "0"} Reviews
               </span>
             </div>
-            <p className="leading-relaxed mb-4">
-              {product.description || "No description available."}
-            </p>
+            <p
+              className="leading-relaxed mb-4"
+              dangerouslySetInnerHTML={{
+                __html: product.description || "No description available.",
+              }}
+            ></p>
+
             <div className="flex justify-between items-center">
               <span className="text-2xl font-semibold text-gray-900">
                 NRS {product.price || "0"}
