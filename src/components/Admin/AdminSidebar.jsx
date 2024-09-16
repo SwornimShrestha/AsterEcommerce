@@ -5,7 +5,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const AdminSidebar = () => {
   const [toggleProduct, setToggleProduct] = useState(false);
@@ -13,6 +13,8 @@ const AdminSidebar = () => {
   const toggleChange = () => {
     setToggleProduct(!toggleProduct);
   };
+  const activeClassName = "text-gray-500";
+
   return (
     <section className="bg-gray-900 p-5 w-64  h-screen">
       <div className="flex flex-col  gap-8 mb-5">
@@ -35,10 +37,16 @@ const AdminSidebar = () => {
       {/* Dashboard */}
       <div className="text-gray-300 text-base font-semibold">
         <ul className="cursor-pointer flex flex-col">
-          <Link to="" className="flex items-center gap-2 mb-3">
+          <NavLink
+            to=""
+            end
+            className={({ isActive }) =>
+              `flex items-center gap-2 mb-3 ${isActive ? activeClassName : ""}`
+            }
+          >
             <GridViewIcon sx={{ fontSize: 20, color: "gray" }} />
             Dashboard
-          </Link>
+          </NavLink>
 
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
@@ -56,31 +64,43 @@ const AdminSidebar = () => {
 
           {toggleProduct && (
             <ul className="list-disc ml-8 flex flex-col">
-              <Link
+              <NavLink
                 to="/admin/product/create"
-                className="mb-1 text-sm text-gray-400"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 mb-3 ${
+                    isActive ? activeClassName : ""
+                  }`
+                }
               >
                 Add New Product
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/admin/product/view"
-                className="mb-1 text-sm text-gray-400"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 mb-3 ${
+                    isActive ? activeClassName : ""
+                  }`
+                }
               >
                 View All Product
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/admin/product/category"
-                className="mb-1 text-sm text-gray-400"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 mb-3 ${
+                    isActive ? activeClassName : ""
+                  }`
+                }
               >
                 Category
-              </Link>
+              </NavLink>
             </ul>
           )}
 
-          <Link to="/" className="flex items-center gap-2 mb-3">
+          <NavLink to="/" className="flex items-center gap-2 mb-3">
             <LogoutIcon sx={{ fontSize: 20, color: "gray" }} />
             Home
-          </Link>
+          </NavLink>
         </ul>
       </div>
     </section>
