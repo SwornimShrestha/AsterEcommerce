@@ -56,7 +56,7 @@ export default function AllProduct() {
         </Link>
       </div>
       <div className="  w-full h-96 flex-col">
-        <div className="w-full h-auto   mb-5 flex justify-between flex-wrap px-3">
+        <div className="w-full h-auto   mb-5 flex justify-between flex-wrap px-3 gap-y-4">
           <h1 className="ml-10 font-medium">All Product</h1>
           <div className="flex flex-wrap  gap-4  items-center">
             <input
@@ -76,7 +76,7 @@ export default function AllProduct() {
             />
           </div>
         </div>
-        <TableContainer component={Paper} sx={{ paddingLeft: 15 }}>
+        <TableContainer component={Paper} sx={{ paddingLeft: 5 }}>
           <Table sx={{ minWidth: 650 }} size="small">
             <TableHead>
               <TableRow>
