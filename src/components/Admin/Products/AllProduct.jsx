@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -42,6 +41,24 @@ export default function AllProduct() {
       );
     } catch (error) {
       console.error("Error occurred while deleting:", error);
+    }
+  };
+
+  const handleFeaturedToggle = async (productId, currentStatus) => {
+    try {
+      const updatedProduct = { featured: !currentStatus };
+      await axios.patch(
+        `${import.meta.env.VITE_PRODUCTS}${productId}`,
+        updatedProduct
+      );
+      toast.success(`Product ${!currentStatus ? "featured" : "unfeatured"}.`);
+      setProduct((prevData) =>
+        prevData.map((data) =>
+          data.id === productId ? { ...data, featured: !currentStatus } : data
+        )
+      );
+    } catch (error) {
+      console.error("Error occurred while updating featured status:", error);
     }
   };
 
@@ -152,8 +169,17 @@ export default function AllProduct() {
                     />
                   </TableCell>
 
-                  <TableCell align="center">
-                    <Switch color="success" />
+                  <TableCell
+                    align="center"
+                    sx={{ color: data.featured ? "green" : "red" }}
+                  >
+                    <Switch
+                      color={data.featured ? "success" : "default"}
+                      checked={data.featured}
+                      onChange={() =>
+                        handleFeaturedToggle(data.id, data.featured)
+                      }
+                    />
                   </TableCell>
                   <TableCell align="center">
                     <div className="flex items-center gap-2 ">

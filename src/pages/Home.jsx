@@ -1,5 +1,7 @@
 import React from "react";
 import Products from "../components/Product/Products";
+import FeaturedProduct from "../components/Product/FeaturedProduct";
+import FeaturedCategory from "../components/Product/FeaturedCategory";
 
 const Home = () => {
   return (
@@ -24,6 +26,17 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <FeaturedCategory />
+      <FeaturedProduct />
+      <section className="px-12">
+        <div className=" relative  overflow-hidden">
+          <img
+            className="w-full h-96 scale-100 hover:scale-105 transition-transform ease-in duration-500 object-cover"
+            src="https://img.freepik.com/free-psd/e-commerce-flat-design-youtube-banner_23-2151267937.jpg?w=1380&t=st=1726570785~exp=1726571385~hmac=c1cd90e0ebb358b7143eeb6525b6c81aca968b234d927b471e38741d27b88dbf"
+            alt=""
+          />
+        </div>
+      </section>
       <Products />
     </div>
   );

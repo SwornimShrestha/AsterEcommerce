@@ -34,6 +34,7 @@ const AddProduct = () => {
     image: "",
     refundable: false,
     category: [],
+    featured: false,
   });
 
   const handleChange = (e) => {

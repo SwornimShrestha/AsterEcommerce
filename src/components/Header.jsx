@@ -21,11 +21,11 @@ const Header = () => {
 
   return (
     <div
-      className={`fixed w-full z-50 transition-all duration-300 ${
+      className={`fixed w-full z-50 transition-all duration-300 px-12 ${
         isScrolled ? "bg-gray-600/50" : "bg-transparent"
       }`}
     >
-      <div className="w-full text-white p-3 flex justify-between items-center">
+      <div className="w-full text-white py-3 flex justify-between items-center">
         <Link to="/">
           <div className="flex items-center gap-3">
             <img
