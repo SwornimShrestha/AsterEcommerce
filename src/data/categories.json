@@ -3,6 +3,7 @@
         {
           "id": "electronics",
           "name": "Electronics",
+          "image":"https://images.unsplash.com/photo-1642189198430-613ec31bb03e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "subcategories": [
             {
               "id": "mobile-phones",
@@ -37,6 +38,7 @@
         {
           "id": "fashion",
           "name": "Fashion",
+          "image":"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "subcategories": [
             {
               "id": "mens-clothing",
@@ -63,6 +65,74 @@
                 {
                   "id": "skirts",
                   "name": "Skirts"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "jewelry",
+          "name": "Jewelry",
+          "image": "https://images.unsplash.com/photo-1656428852088-dc40d6c76885?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",      "subcategories": [
+            {
+              "id": "rings",
+              "name": "Rings",
+              "subcategories": [
+                {
+                  "id": "diamond-rings",
+                  "name": "Diamond Rings"
+                },
+                {
+                  "id": "gold-rings",
+                  "name": "Gold Rings"
+                }
+              ]
+            },
+            {
+              "id": "necklaces",
+              "name": "Necklaces",
+              "subcategories": [
+                {
+                  "id": "pearl-necklaces",
+                  "name": "Pearl Necklaces"
+                },
+                {
+                  "id": "silver-necklaces",
+                  "name": "Silver Necklaces"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "kids-toys",
+          "name": "Kids & Toys",
+          "image": "https://images.unsplash.com/photo-1484820540004-14229fe36ca4?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",   "subcategories": [
+            {
+              "id": "toys",
+              "name": "Toys",
+              "subcategories": [
+                {
+                  "id": "action-figures",
+                  "name": "Action Figures"
+                },
+                {
+                  "id": "puzzles",
+                  "name": "Puzzles"
+                }
+              ]
+            },
+            {
+              "id": "kids-clothing",
+              "name": "Kids Clothing",
+              "subcategories": [
+                {
+                  "id": "baby-clothes",
+                  "name": "Baby Clothes"
+                },
+                {
+                  "id": "kids-shoes",
+                  "name": "Kids Shoes"
                 }
               ]
             }

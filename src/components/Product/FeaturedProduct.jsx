@@ -35,7 +35,7 @@ const FeaturedProduct = () => {
       ) : (
         <p>No featured products available at the moment.</p>
       )} */}
-      <div className="flex justify-start flex-wrap gap-3">
+      <div className="flex justify-center 2xl:justify-start flex-wrap md:flex-wrap 2xl:flex-nowrap gap-3 ">
         <FeaturedProductCard />
         <FeaturedProductCard />
         <FeaturedProductCard />

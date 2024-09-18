@@ -3,7 +3,7 @@ import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 const FeaturedProductCard = () => {
   return (
-    <div className="max-w-56 overflow-hidden  rounded-lg shadow-2xl ">
+    <div className="w-52 lg:w-56 2xl:w-72   overflow-hidden  rounded-lg shadow-2xl ">
       <div className="relative overflow-hidden  w-full  group">
         <div className="w-8 h-5 absolute bg-red-600 left-4 top-3 text-white text-xs  font-bold text-center rounded z-10">
           -2%

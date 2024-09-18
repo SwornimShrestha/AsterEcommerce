@@ -5,33 +5,39 @@ const FeaturedCategory = () => {
   const [categories, setCategories] = useState(categoryData.category);
 
   return (
-    <div className="flex gap-12">
-      {" "}
-      {/* Use flex and gap for spacing */}
-      {categories.map((category) => (
-        <div key={category.id} className="flex flex-col">
-          {/* Flex column to ensure subcategories are listed vertically */}
-          <h1 className="font-semibold">{category.name}</h1>
-          {category.subcategories.map((sub) => (
-            <div key={sub.id} className="ml-4">
-              {/* Use margin-left (ml-4) for indentation */}
-              <input type="text" />
-              <label className="ml-2">{sub.name}</label>
-              {sub.subcategories && sub.subcategories.length > 0 && (
-                <div className="ml-8">
-                  {/* Nested subcategories indented further */}
-                  {sub.subcategories.map((sub) => (
-                    <div key={sub.id} className="ml-4">
-                      <input type="text" />
-                      <label className="ml-2">{sub.name}</label>
+    <div className="px-12">
+      <div>
+        <h1 className="font-semibold text-xl mt-14 mb-4">Featured Category</h1>
+      </div>
+      <div className="flex gap-20 flex-wrap ">
+        {categories.map((category) => (
+          <div key={category.id} className="flex flex-row gap-3  pr-2">
+            <img
+              src={category.image}
+              alt={category.name}
+              className="w-60 h-64 object-cover object-top"
+            />
+
+            <div className="font-medium text-sm flex flex-col gap-2">
+              <h1 className="font-bold text-lg">{category.name}</h1>
+              {category.subcategories.map((sub) => (
+                <div key={sub.id} className="flex flex-col gap-2">
+                  {sub.name}
+                  {sub.subcategories && sub.subcategories.length > 0 && (
+                    <div>
+                      {sub.subcategories.map((sub) => (
+                        <div key={sub.id} className="mb-2">
+                          {sub.name}{" "}
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  )}
                 </div>
-              )}
+              ))}
             </div>
-          ))}
-        </div>
-      ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
