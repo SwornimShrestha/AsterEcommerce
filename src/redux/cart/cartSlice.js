@@ -29,7 +29,7 @@ const cartSlice = createSlice({
       const { id, amount } = action.payload;
       const item = state.items.find((i) => i.id === id);
       if (item) {
-        item.quantity -= amount;
+        item.quantity = Math.max(0, item.quantity - amount);
       }
     },
     removeItem: (state, action) => {
