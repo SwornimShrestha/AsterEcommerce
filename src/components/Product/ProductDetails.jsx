@@ -1,13 +1,35 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import CartSidebar from "./CartSidebar";
+
+import { useDispatch } from "react-redux";
+import { addItem } from "../../redux/cart/cartSlice";
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [open, setopen] = useState(false);
+
+  const handleOpenCart = () => {
+    setopen(!open);
+  };
+
+  const handleAddToCart = () => {
+    dispatch(
+      addItem({
+        id: product.id,
+        name: product.productName,
+        price: product.price,
+        quantity: 1, // Or any other logic to set the quantity
+        imageSrc: product.image,
+      })
+    );
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,24 +91,20 @@ const ProductDetails = () => {
               }}
             ></p>
 
-            <div className="flex justify-between items-center">
+            <div className="flex justify-start gap-5 items-center">
               <span className="text-2xl font-semibold text-gray-900">
                 NRS {product.price || "0"}
               </span>
-              <div className="flex space-x-2">
-                <button
-                  // onClick={() => handleCart(product, true)}
-                  className="bg-indigo-500 text-white px-6 py-2 rounded-md shadow hover:bg-indigo-600 focus:outline-none"
-                >
-                  BUY IT NOW
-                </button>
-                <button
-                  // onClick={() => handleCart(product)}
-                  className="bg-transparent text-indigo-500 border border-indigo-500 px-6 py-2 rounded-md shadow hover:bg-indigo-100 focus:outline-none"
-                >
-                  ADD TO CART
-                </button>
-              </div>
+              <button
+                onClick={() => {
+                  handleAddToCart();
+                  handleOpenCart();
+                }}
+                className="bg-transparent text-indigo-500 border border-indigo-500 px-6 py-2 rounded-md shadow hover:bg-indigo-100 focus:outline-none"
+              >
+                ADD TO CART
+              </button>
+
               <button className="w-10 h-10 bg-gray-200 text-gray-500 rounded-full flex items-center justify-center ml-4 hover:bg-gray-300">
                 <svg
                   fill="currentColor"
@@ -103,6 +121,7 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+      <CartSidebar open={open} onClose={handleOpenCart} />
     </section>
   );
 };
