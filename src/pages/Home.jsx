@@ -1,34 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import Products from "../components/Product/Products";
 import FeaturedProduct from "../components/Product/FeaturedProduct";
 import FeaturedCategory from "../components/Product/FeaturedCategory";
-
 const Home = () => {
   return (
     <div className="">
-      <div className="relative">
-        <img
-          className="w-full h-[80vh] object-cover object-left"
-          src="https://plus.unsplash.com/premium_photo-1683984171269-04c84ee23234?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="Ecommerce banner"
-        />
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="text-center text-white">
-            <h1 className="text-4xl font-bold md:text-6xl">
-              Welcome to Our Ecommerce Store
+      <div className="w full h-96 lg:h-[35rem] xl:h-[36rem] 2xl:h-[37rem] 3xl:h-[50rem] 4  flex flex-row px-12 gap-3 mt-12">
+        <div className="w-1/2 h-full bg--400 flex flex-col overflow-hidden gap-5  justify-between relative pt-20 ">
+          <div className="pr-12">
+            <h1 className="text-2xl lg:text-4xl 2xl:text-5xl  font-bold mb-2 text-blue-400">
+              Welcome to Ecommerce websites
             </h1>
-            <p className="mt-4 text-lg md:text-xl">
-              Discover the latest products at unbeatable prices
+            <p className="mb-4 text-blue-900 font-semibold text-xs lg:text-sm 2xl:text-base ">
+              Explore a wide range of products tailored to meet your needs. Shop
+              the latest trends with great discounts and offers.
             </p>
-            <button className="mt-6 px-6 py-2 bg-yellow-500 hover:bg-yellow-600 rounded-lg text-white font-semibold text-lg">
-              Shop Now
+            <input
+              type="text"
+              placeholder="Search for products..."
+              className="w-2/3 p-2 border-2 border-blue-500 rounded-md"
+            />
+            <button className="mt-4  ml-1 px-4 py-2 bg-blue-500 text-white rounded-md">
+              Search
             </button>
           </div>
+
+          <div className="flex justify-between gap-4 w-full ">
+            <div className="w-1/3">
+              <img
+                className="w-full h-auto rounded-lg shadow-lg"
+                src="https://demo.activeitzone.com/ecommerce/uploads/all/pUqWgFks5gnKYO9I6e84rWL0WMiheaBq3LrknFtq.webp"
+                alt="Category 1"
+              />
+            </div>
+            <div className="w-1/3">
+              <img
+                className="w-full h-auto rounded-lg shadow-lg"
+                src="https://demo.activeitzone.com/ecommerce/uploads/all/V7PbqhwELyJdDKTvtJq55KxmHhU1TCNN7XU2excd.webp"
+                alt="Category 2"
+              />
+            </div>
+            <div className="w-1/3">
+              <img
+                className="w-full h-auto rounded-lg shadow-lg"
+                src="https://demo.activeitzone.com/ecommerce/uploads/all/gi8k2mSdLBFKM3TO08IGkyRZXiqUCF6PofaL6lbl.webp"
+                alt="Category 3"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="w-1/2 h-full bg-red-400 relative overflow-hidden">
+          {" "}
+          <img
+            className=" object-cover rounded-lg shadow-lg object-center w-full h-full"
+            src="https://demo.activeitzone.com/ecommerce/uploads/all/2cXgUZDtznvdWIguw3yRTo5owCO9ncHrFgqroExR.webp"
+            alt="Large ecommerce image"
+          />
         </div>
       </div>
-      <FeaturedCategory />
-      <FeaturedProduct />
-      <section className="px-12">
+
+      <section className="mt-28">
+        <FeaturedCategory />
+      </section>
+      <section className="mt-24">
+        <FeaturedProduct />
+      </section>
+      <section className="px-12 mt-20">
         <div className=" relative  overflow-hidden">
           <img
             className="w-full h-96 scale-100 hover:scale-105 transition-transform ease-in duration-500 object-cover"
@@ -37,7 +74,9 @@ const Home = () => {
           />
         </div>
       </section>
-      <Products />
+      <section>
+        <Products />
+      </section>
     </div>
   );
 };

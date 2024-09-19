@@ -10,6 +10,8 @@ import { useState } from "react";
 import { Box, Grid2, Typography } from "@mui/material";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { signInSuccess } from "../redux/user/userSlice";
 
 export default function Login() {
   const [open, setOpen] = useState(false);
@@ -17,6 +19,8 @@ export default function Login() {
     email: "",
     password: "",
   });
+
+  const dispatch = useDispatch();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -38,6 +42,9 @@ export default function Login() {
           `${import.meta.env.VITE_LOGIN}`,
           formData
         );
+        console.log(response.data);
+
+        dispatch(signInSuccess(response.data));
         toast.success("Login Successfully!!!");
         setFormData({
           email: "",
@@ -61,26 +68,24 @@ export default function Login() {
         variant="contained"
         onClick={handleClickOpen}
         sx={{
-          borderRadius: "20px",
-          padding: "10px 20px",
-          backgroundColor: "#c62828",
+          fontWeight: 10,
+          fontSize: 13,
+          borderRadius: "4px",
+          padding: "1px 2px",
+          backgroundColor: "#3f73af",
         }}
       >
         Login
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth="md">
-        <Grid2 container>
+        <div className="flex flex-row  ">
           {/* Left Section */}
 
-          <Box
-            component="img"
-            className="object-cover object-center hidden lg:block"
-            src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?w=740&t=st=1726648105~exp=1726648705~hmac=ae176f146c1fcbac5fe944606d7003d954459418bbb3eabb9e4d3434a15ac508"
-            alt="Access Elite"
-            sx={{ width: "400px" }}
-          />
+          <div className="object-cover object-center w-[30rem] hidden  md:block  lg:block 2xl:block  ">
+            <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?w=740&t=st=1726648105~exp=1726648705~hmac=ae176f146c1fcbac5fe944606d7003d954459418bbb3eabb9e4d3434a15ac508" />
+          </div>
           {/* Right Section */}
-          <Grid2 item xs={7}>
+          <div>
             <DialogTitle sx={{ textAlign: "center", fontWeight: "bold" }}>
               Sign in
             </DialogTitle>
@@ -140,8 +145,8 @@ export default function Login() {
             >
               Not a member? <a href="/signup">Sign up</a>
             </Typography>
-          </Grid2>
-        </Grid2>
+          </div>
+        </div>
       </Dialog>
     </>
   );

@@ -9,13 +9,13 @@ const FeaturedCategory = () => {
       <div>
         <h1 className="font-semibold text-xl mt-14 mb-4">Featured Category</h1>
       </div>
-      <div className="flex gap-20 flex-wrap ">
+      <div className="flex gap-16 flex-wrap ">
         {categories.map((category) => (
           <div key={category.id} className="flex flex-row gap-3  pr-2">
             <img
               src={category.image}
               alt={category.name}
-              className="w-60 h-64 object-cover object-top"
+              className="w-44 h-52 object-cover object-top"
             />
 
             <div className="font-medium text-sm flex flex-col gap-2">
