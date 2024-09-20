@@ -33,7 +33,7 @@ const ProductCard = ({ products = [] }) => {
       {products.map((product) => (
         <div
           key={product.id}
-          className="w-52 lg:w-56 2xl:w-60 overflow-hidden rounded-lg shadow-2xl block"
+          className="w-96  lg:w-56 2xl:w-60 overflow-hidden rounded-lg shadow-2xl block"
         >
           <Link
             to={`/products/${product.id}`}

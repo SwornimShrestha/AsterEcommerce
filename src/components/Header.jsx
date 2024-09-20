@@ -35,7 +35,7 @@ const Header = () => {
         isScrolled ? "bg-gray-600/50" : "bg-slate-600"
       }`}
     >
-      <div className="w-full text-white py-1 flex justify-between items-center">
+      <div className="w-full text-white py-1 flex justify-between items-center flex-wrap">
         <Link to="/">
           <div className="flex items-center gap-3">
             <img

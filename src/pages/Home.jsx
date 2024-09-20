@@ -6,26 +6,26 @@ const Home = () => {
   return (
     <div className="">
       <div className="w full h-96 lg:h-[35rem] xl:h-[36rem] 2xl:h-[37rem] 3xl:h-[50rem] 4  flex flex-row px-12 gap-3 mt-12">
-        <div className="w-1/2 h-full bg--400 flex flex-col overflow-hidden gap-5  justify-between relative pt-20 ">
+        <div className="w-full md:w-1/2 h-full  flex flex-col overflow-hidden gap-5  justify-between relative pt-20 ">
           <div className="pr-12">
-            <h1 className="text-2xl lg:text-4xl 2xl:text-5xl  font-bold mb-2 text-blue-400">
+            <h1 className="text-base lg:text-4xl 2xl:text-5xl  font-bold mb-2 text-blue-400">
               Welcome to Ecommerce websites
             </h1>
-            <p className="mb-4 text-blue-900 font-semibold text-xs lg:text-sm 2xl:text-base ">
+            <p className="mb-4 text-blue-900 font-semibold text-xs lg:text-sm 2xl:text-base   ">
               Explore a wide range of products tailored to meet your needs. Shop
               the latest trends with great discounts and offers.
             </p>
             <input
               type="text"
               placeholder="Search for products..."
-              className="w-2/3 p-2 border-2 border-blue-500 rounded-md"
+              className="w-1/2 lg:w-2/3 p-1 lg:p-2 border-2 border-blue-500 rounded-md"
             />
-            <button className="mt-4  ml-1 px-4 py-2 bg-blue-500 text-white rounded-md">
+            <button className="mt-4  ml-1 px-2 py-1  lg:px-4 lg:py-2 bg-blue-500 text-white rounded-md">
               Search
             </button>
           </div>
 
-          <div className="flex justify-between gap-4 w-full ">
+          <div className="flex justify-between gap-4 w-full  ">
             <div className="w-1/3">
               <img
                 className="w-full h-auto rounded-lg shadow-lg"
@@ -49,7 +49,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="w-1/2 h-full bg-red-400 relative overflow-hidden">
+        <div className="w-1/2 h-full  relative overflow-hidden hidden md:block">
           {" "}
           <img
             className=" object-cover rounded-lg shadow-lg object-center w-full h-full"
