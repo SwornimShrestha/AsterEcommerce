@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Login from "./Login";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { signOut } from "../redux/user/userSlice";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const currentUser = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > window.innerHeight * 0.05) {
@@ -21,6 +23,11 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleLogout = () => {
+    dispatch(signOut());
+    toast.error("Logout !!");
+  };
 
   return (
     <div
@@ -54,14 +61,31 @@ const Header = () => {
         </div>
         <div className="">
           {currentUser ? (
-            <Link to="/admin">
-              <button
-                className="rounded-md bg-amber-400 py-1 px-2 border border-transparent text-center text-xs font-semibold text-slate-800 transition-all shadow-md hover:shadow-lg hover:bg-amber-500 hover:text-white ml-2"
-                type="button"
-              >
-                {currentUser.email}
-              </button>
-            </Link>
+            <>
+              {currentUser.type === "admin" ? (
+                <Link to="/admin">
+                  <button
+                    className="rounded-md bg-amber-400 py-1 px-2 border border-transparent text-center text-xs font-semibold text-slate-800 transition-all shadow-md hover:shadow-lg hover:bg-amber-500 hover:text-white ml-2"
+                    type="button"
+                  >
+                    Admin Dashboard
+                  </button>
+                </Link>
+              ) : (
+                <div className="flex items-center">
+                  <span className="text-white">{currentUser.email}</span>
+                  <Link to="/">
+                    <button
+                      onClick={handleLogout}
+                      className="rounded-md bg-red-600 py-1 px-2 border border-transparent text-center text-xs font-semibold text-gray-100 transition-all shadow-md hover:shadow-lg hover:bg-amber-500 hover:text-white ml-2"
+                      type="button"
+                    >
+                      Logout
+                    </button>
+                  </Link>
+                </div>
+              )}
+            </>
           ) : (
             <Login />
           )}

@@ -26,8 +26,10 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function CartSidebar({ open, onClose }) {
+  const currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items);
 
@@ -50,6 +52,15 @@ export default function CartSidebar({ open, onClose }) {
   };
 
   const handleConfirmCheckout = () => {
+    if (!currentUser) {
+      toast.error("Login First");
+      return;
+    }
+
+    if (currentUser.type !== "user") {
+      toast.error("!Only user can proceed with checkout");
+      return;
+    }
     dispatch(removeAllItem());
     setConfirmCheckoutOpen(false);
     setCheckoutSuccessOpen(true);

@@ -1,26 +1,49 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
-import { Box, Grid2, Typography } from "@mui/material";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { signInSuccess } from "../redux/user/userSlice";
 
+const schema = z.object({
+  email: z.string().email("Invalid email format"),
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .max(20, "Password cannot exceed 20 characters"),
+  type: z.enum(["admin", "user"], { required_error: "Please select a type" }),
+});
+
 export default function Login() {
   const [open, setOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
 
   const dispatch = useDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,37 +52,18 @@ export default function Login() {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const postData = async () => {
-      try {
-        const response = await axios.post(
-          `${import.meta.env.VITE_LOGIN}`,
-          formData
-        );
-        console.log(response.data);
-
-        dispatch(signInSuccess(response.data));
-        toast.success("Login Successfully!!!");
-        setFormData({
-          email: "",
-          password: "",
-        });
-        setTimeout(() => {
-          setOpen(false);
-        }, 2000);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error while login:", error);
-      }
-    };
-    postData();
-    console.log(formData);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_LOGIN}`, data);
+      dispatch(signInSuccess(response.data));
+      toast.success("Login Successfully!!!");
+      reset();
+      setTimeout(() => setOpen(false), 2000);
+    } catch (error) {
+      toast.error("Login failed!");
+      console.error("Error during login:", error);
+    }
   };
 
   return (
@@ -78,10 +82,9 @@ export default function Login() {
         Login
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth="md">
-        <div className="flex flex-row  ">
+        <div className="flex flex-row">
           {/* Left Section */}
-
-          <div className="object-cover object-center w-[30rem] hidden  md:block  lg:block 2xl:block  ">
+          <div className="object-cover object-center w-[40rem] hidden md:block lg:block 2xl:block">
             <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?w=740&t=st=1726648105~exp=1726648705~hmac=ae176f146c1fcbac5fe944606d7003d954459418bbb3eabb9e4d3434a15ac508" />
           </div>
           {/* Right Section */}
@@ -96,29 +99,39 @@ export default function Login() {
                 Sign in if you have an account in here
               </DialogContentText>
               <TextField
-                autoFocus
-                required
+                {...register("email")}
                 margin="dense"
                 name="email"
                 label="Your email"
-                value={formData.email}
-                onChange={handleChange}
                 type="email"
                 fullWidth
                 variant="outlined"
-                sx={{ marginBottom: "20px" }}
+                error={!!errors.email}
+                helperText={errors.email?.message}
               />
               <TextField
-                required
+                {...register("password")}
                 margin="dense"
                 name="password"
-                value={formData.password}
-                onChange={handleChange}
                 label="Password"
                 type="password"
                 fullWidth
                 variant="outlined"
+                error={!!errors.password}
+                helperText={errors.password?.message}
+                sx={{ marginBottom: "14px" }}
               />
+              <FormControl
+                variant="standard"
+                sx={{ m: 1, minWidth: 120 }}
+                error={!!errors.type}
+              >
+                <InputLabel>Type</InputLabel>
+                <Select {...register("type")} name="type">
+                  <MenuItem value="admin">admin</MenuItem>
+                  <MenuItem value="user">user</MenuItem>
+                </Select>
+              </FormControl>
             </DialogContent>
             <DialogActions sx={{ justifyContent: "center", padding: "20px" }}>
               <Button
@@ -130,7 +143,7 @@ export default function Login() {
                 Cancel
               </Button>
               <Button
-                onClick={handleSubmit}
+                onClick={handleSubmit(onSubmit)}
                 type="submit"
                 variant="contained"
                 color="primary"
