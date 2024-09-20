@@ -6,15 +6,22 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signOut } from "../../redux/user/userSlice";
+import { toast } from "react-toastify";
 
 const AdminSidebar = () => {
   const [toggleProduct, setToggleProduct] = useState(false);
-
+  const dispatch = useDispatch();
   const toggleChange = () => {
     setToggleProduct(!toggleProduct);
   };
   const activeClassName = "text-gray-500";
 
+  const handleLogout = () => {
+    dispatch(signOut());
+    toast.error("Logout!!");
+  };
   return (
     <section className="bg-gray-900 p-5 w-64  h-screen">
       <div className="flex flex-col  gap-8 mb-5">
@@ -100,6 +107,14 @@ const AdminSidebar = () => {
           <NavLink to="/" className="flex items-center gap-2 mb-3">
             <LogoutIcon sx={{ fontSize: 20, color: "gray" }} />
             Home
+          </NavLink>
+          <NavLink
+            onClick={handleLogout}
+            to="/"
+            className="flex items-center gap-2 mb-3"
+          >
+            <LogoutIcon sx={{ fontSize: 20, color: "gray" }} />
+            Logout
           </NavLink>
         </ul>
       </div>
