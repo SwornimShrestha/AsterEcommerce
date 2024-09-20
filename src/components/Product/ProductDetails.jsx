@@ -25,7 +25,7 @@ const ProductDetails = () => {
         id: product.id,
         name: product.productName,
         price: product.price,
-        quantity: 1, // Or any other logic to set the quantity
+        quantity: 1,
         imageSrc: product.image,
       })
     );
@@ -54,7 +54,7 @@ const ProductDetails = () => {
 
   return (
     <section className="text-gray-700 ">
-      <div></div>
+      
       <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">

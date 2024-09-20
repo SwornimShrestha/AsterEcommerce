@@ -1,18 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
-import { Link } from "react-router-dom"; // Use react-router-dom for navigation
+
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { Link } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import { useDispatch } from "react-redux";
+import CartSidebar from "./CartSidebar";
+import { addItem } from "../../redux/cart/cartSlice";
 
 const ProductCard = ({ products = [] }) => {
+  const dispatch = useDispatch();
+  const [open, setopen] = useState(false);
+  const handleOpenCart = () => {
+    setopen(!open);
+  };
+
+  const handleAddToCart = (product) => {
+    dispatch(
+      addItem({
+        id: product.id,
+        name: product.productName,
+        price: product.price,
+        quantity: 1,
+        imageSrc: product.image,
+      })
+    );
+  };
+
   return (
     <>
       {products.map((product) => (
-        <Link
+        <div
           key={product.id}
-          to={`/products/${product.id}`}
-          className="w-52 lg:w-56 2xl:w-72 overflow-hidden rounded-lg shadow-2xl block" // Make the link behave like a block element
+          className="w-52 lg:w-56 2xl:w-60 overflow-hidden rounded-lg shadow-2xl block"
         >
-          <div className="relative overflow-hidden w-full group">
+          <Link
+            to={`/products/${product.id}`}
+            className="relative overflow-hidden w-full group block"
+          >
             <div className="w-8 h-5 absolute bg-red-600 left-4 top-3 text-white text-xs font-bold text-center rounded z-10">
               -2%
             </div>
@@ -28,7 +54,7 @@ const ProductCard = ({ products = [] }) => {
               src={product.image}
               alt={product.productName} // Use productName for alt text
             />
-          </div>
+          </Link>
           <div className="px-4 py-2">
             <h1 className="text-lg font-bold text-gray-800 uppercase">
               {product.productName}
@@ -46,24 +72,19 @@ const ProductCard = ({ products = [] }) => {
             <h1 className="text-base font-bold text-gray-800">
               NRS {product.price}
             </h1>
-            <button className="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-5 h-5 sm:w-6 sm:h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
-                />
-              </svg>
-            </button>
+            <IconButton
+              onClick={() => {
+                handleAddToCart(product);
+                handleOpenCart();
+              }}
+              color="primary"
+              aria-label="add to shopping cart"
+            >
+              <AddShoppingCartIcon />
+            </IconButton>
           </div>
-        </Link>
+          <CartSidebar open={open} onClose={handleOpenCart} />
+        </div>
       ))}
     </>
   );

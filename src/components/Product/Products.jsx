@@ -27,7 +27,9 @@ const Products = () => {
           All Products
         </p>
       </div>
-      <ProductCard products={products} />
+      <div className="flex justify-center 2xl:justify-start flex-wrap md:flex-wrap 2xl:flex-nowrap gap-3 ">
+        <ProductCard products={products} />
+      </div>
     </div>
   );
 };
