@@ -52,11 +52,10 @@ const ProductCard = ({ products = [] }) => {
             <img
               className="object-cover w-full h-48 group-hover:scale-125 transition-transform ease-in-out duration-100"
               src={product.image}
-              alt={product.productName} // Use productName for alt text
             />
           </Link>
           <div className="px-4 py-2">
-            <h1 className="text-lg font-bold text-gray-800 uppercase">
+            <h1 className="text-lg font-bold text-gray-800 uppercase line-clamp-1">
               {product.productName}
             </h1>
             <p className="mt-1 text-sm text-gray-600">

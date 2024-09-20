@@ -30,13 +30,7 @@ const FeaturedProduct = () => {
         </button>
       </div>
 
-      {/* {featuredProducts.length > 0 ? (
-        <ProductCard products={featuredProducts} />
-      ) : (
-        <p>No featured products available at the moment.</p>
-      )} */}
-      <div className="flex justify-center 2xl:justify-start flex-wrap md:flex-wrap 2xl:flex-nowrap gap-3 ">
-        {/* <FeaturedProductCard /> */}
+      <div className="flex justify-start flex-wrap md:flex-wrap 2xl:flex-nowrap gap-3 ">
         {featuredProducts.length > 0 ? (
           <ProductCard products={featuredProducts} />
         ) : (
