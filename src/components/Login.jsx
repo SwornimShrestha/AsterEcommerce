@@ -41,8 +41,14 @@ export default function Login() {
     handleSubmit,
     reset,
     formState: { errors },
+    watch,
   } = useForm({
     resolver: zodResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+      type: "",
+    },
   });
 
   const handleClickOpen = () => {
@@ -127,7 +133,11 @@ export default function Login() {
                 error={!!errors.type}
               >
                 <InputLabel>Type</InputLabel>
-                <Select {...register("type")} name="type">
+                <Select
+                  {...register("type")}
+                  name="type"
+                  value={watch("type") || ""}
+                >
                   <MenuItem value="admin">admin</MenuItem>
                   <MenuItem value="user">user</MenuItem>
                 </Select>
